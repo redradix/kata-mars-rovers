@@ -16,7 +16,7 @@ const rotateRight = {
   E: 'S'
 }
 
-function isAtGridBoundaries(orientation, position, gridSize, commands) {
+function isAtGridBoundaries(orientation, position, gridSize) {
   return orientation === 'N' && position[1] === gridSize[1] - 1
 }
 
@@ -25,7 +25,7 @@ function processCommand(initialPos, gridSize, command){
 
   switch (command) {
     case 'm':{
-      if (isAtGridBoundaries(orientation, position, gridSize, command))
+      if (isAtGridBoundaries(orientation, position, gridSize))
         return initialPos
       const [deltaX, deltaY] = directionMaps[orientation]
       return { orientation, position: [position[0] + deltaX, position[1] + deltaY] }
