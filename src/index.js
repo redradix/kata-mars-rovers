@@ -16,16 +16,16 @@ const rotateRight = {
   E: 'S'
 }
 
-function outsideLimits(orientation, position, gridSize, commands) {
+function isAtGridBoundaries(orientation, position, gridSize, commands) {
   return orientation === 'N' && position[1] === gridSize[1] - 1
 }
 
-function rover(initialPos, gridSize, commands){
+function processCommand(initialPos, gridSize, command){
   const { position, orientation } = initialPos
 
-  switch (commands) {
+  switch (command) {
     case 'm':{
-      if (outsideLimits(orientation, position, gridSize, commands))
+      if (isAtGridBoundaries(orientation, position, gridSize, command))
         return initialPos
       const [deltaX, deltaY] = directionMaps[orientation]
       return { orientation, position: [position[0] + deltaX, position[1] + deltaY] }
@@ -39,6 +39,14 @@ function rover(initialPos, gridSize, commands){
     default:
       return initialPos
   }
+}
+
+function rover(initialPos, gridSize, commandList){
+  const { position, orientation } = initialPos
+  const commands = commandList.split('')
+  return commands.reduce((acc, cmd) => 
+    processCommand(acc, gridSize, cmd), initialPos
+  )
 }
 
 module.exports = {

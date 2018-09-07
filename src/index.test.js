@@ -1,6 +1,10 @@
 const { rover } = require('./index')
 describe('Mars Rovers', () => {
   const gridSize = [3,3]
+  const makePosition = (x,y,o) => ({
+    position: [x,y],
+    orientation: o
+  })
   
   describe('same position', () => {
     it('stays in the same position for an empty commands argument', () => {
@@ -33,9 +37,9 @@ describe('Mars Rovers', () => {
     
   describe('advance', () => {
     it('advances 1 position when receiving `m`', () => {
-      const pos = { position: [0,0], orientation: 'N'}
+      const position = makePosition(0,0,'N')
       const command = 'm'
-      const endPosition = rover(pos, gridSize, command)
+      const endPosition = rover(position, gridSize, command)
       expect(endPosition).toEqual({
         position: [0,1],
         orientation: 'N'
@@ -47,14 +51,14 @@ describe('Mars Rovers', () => {
   describe('turning', () => {
     describe('left', () => {
       [
-        { start: { position: [0, 0], orientation: 'N' }, command: 'l', end: { position: [0, 0], orientation: 'W' }},
-        { start: { position: [0, 0], orientation: 'W' }, command: 'l', end: { position: [0, 0], orientation: 'S' }},
-        { start: { position: [0, 0], orientation: 'S' }, command: 'l', end: { position: [0, 0], orientation: 'E' }},
-        { start: { position: [0, 0], orientation: 'E' }, command: 'l', end: { position: [0, 0], orientation: 'N' }}
+        { start: makePosition(0, 0, 'N'), command: 'l', end: makePosition(0, 0, 'W')},
+        { start: makePosition(0, 0, 'W'), command: 'l', end: makePosition(0, 0, 'S')},
+        { start: makePosition(0, 0, 'S'), command: 'l', end: makePosition(0, 0, 'E')},
+        { start: makePosition(0, 0, 'E'), command: 'l', end: makePosition(0, 0, 'N')}
       ].forEach(sample => {
         it(`faces ${sample.end.orientation} when facing ${sample.start.orientation}`, () => {
-          const pos = sample.start
-          const endPosition = rover(pos, gridSize, sample.command)
+          const position = sample.start
+          const endPosition = rover(position, gridSize, sample.command)
           expect(endPosition).toEqual(sample.end)
         })
       })
@@ -62,14 +66,14 @@ describe('Mars Rovers', () => {
 
     describe('right', () => {
       [
-        { start: { position: [0, 0], orientation: 'N' }, command: 'r', end: { position: [0, 0], orientation: 'E' }},
-        { start: { position: [0, 0], orientation: 'W' }, command: 'r', end: { position: [0, 0], orientation: 'N' }},
-        { start: { position: [0, 0], orientation: 'S' }, command: 'r', end: { position: [0, 0], orientation: 'W' }},
-        { start: { position: [0, 0], orientation: 'E' }, command: 'r', end: { position: [0, 0], orientation: 'S' }}
+        { start: makePosition(0, 0, 'N'), command: 'r', end: makePosition(0, 0, 'E')},
+        { start: makePosition(0, 0, 'W'), command: 'r', end: makePosition(0, 0, 'N')},
+        { start: makePosition(0, 0, 'S'), command: 'r', end: makePosition(0, 0, 'W')},
+        { start: makePosition(0, 0, 'E'), command: 'r', end: makePosition(0, 0, 'S')}
       ].forEach(sample => {
         it(`faces ${sample.end.orientation} when facing ${sample.start.orientation}`, () => {
-          const pos = sample.start
-          const endPosition = rover(pos, gridSize, sample.command)
+          const position = sample.start
+          const endPosition = rover(position, gridSize, sample.command)
           expect(endPosition).toEqual(sample.end)
         })
       })
@@ -79,12 +83,12 @@ describe('Mars Rovers', () => {
 
   describe('multiple commands', () => {
     it('moves two positions for mm command', ()=>{
-      const initialPosition = {position: [0, 0], orientation: 'E'}
+      const initialPosition = makePosition(0, 0,'N')
       const command = 'mm'
       
       const endPosition = rover(initialPosition, gridSize, command)
 
-      expect(endPosition).toEqual({position: [2, 0], orientation: 'E'})
+      expect(endPosition).toEqual(makePosition(0, 2,'N'))
     })
   })
 })
