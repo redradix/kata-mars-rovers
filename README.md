@@ -10,4 +10,4 @@ You’re part of the team that explores Mars by sending remotely controlled vehi
 
 * The rover receives a character array of commands.
 
-* Implement commands that turn the rover left/right (l,r) and moves it (m).
+* Implement commands that turn the rover left/right (l, r) and moves it forward/backward (f, b).
