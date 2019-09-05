@@ -71,8 +71,23 @@ const processCommand = (position, direction, gridSize, command) => {
   }
 };
 
-const startExploration = (initalPosition, direction, gridSize, command) => {
-  return processCommand(initalPosition, direction, gridSize, command);
+const startExploration = (initalPosition, direction, gridSize, commands) => {
+  if (!Array.isArray(commands)) return { position: initalPosition, direction };
+
+  let finalPosition = {
+    position: initalPosition
+  };
+  commands.forEach(
+    command =>
+      (finalPosition = processCommand(
+        finalPosition.position,
+        direction,
+        gridSize,
+        command
+      ))
+  );
+
+  return finalPosition;
 };
 
 module.exports = {
