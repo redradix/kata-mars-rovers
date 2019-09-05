@@ -23,7 +23,7 @@ function commandProcesor(pos, dir, gridSize, cmd){
 
 
 /**
- * 
+ * This function drives the rover
  * @param {Array} pos 
  * @param {String} dir 
  * @param {Array} gridSize 
@@ -33,7 +33,7 @@ function drive(pos, dir, gridSize, cmd){
     const pitch = getCompass(cmd)[dir];
 
     pos.map(position, it => pos[it] = position + pitch[it]);//Reasign the new cords
-    
+
 }
 
 
