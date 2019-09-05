@@ -31,9 +31,15 @@ function commandProcesor(pos, dir, gridSize, cmd){
  */
 function drive(pos, dir, gridSize, cmd){
     const pitch = getCompass(cmd)[dir];
+    const lastPos = [...pos];
+    const isOutOfBounds = (pos, gridSize) => pos[0] >= gridSize[0] || pos[1] >= gridSize[1] || pos[0] < 0 || pos[1] < 0;
 
-    pos.map(position, it => pos[it] = position + pitch[it]);//Reasign the new cords
+    pos.map((position, it) => pos[it] = position + pitch[it]);//Reasign the new cords
 
+    return {
+        position: isOutOfBounds(pos, gridSize) ? lastPos : pos,
+        direction: dir
+    }
 }
 
 

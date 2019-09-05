@@ -28,5 +28,25 @@ describe('Mars Rovers', () => {
         })
     );
 
-    
+    test('try to left from the bounds forwarding', () =>
+        expect(rover([2, 2], dirs.North, gridSize, 'f')).toEqual({
+            position: [2, 2],
+            direction: dirs.North
+        })
+    );
+
+    test('drive the rover to forward', () =>
+        expect(rover([1, 1], dirs.North, gridSize, 'f')).toEqual({
+            position: [1, 2],
+            direction: dirs.North
+        })
+    );
+
+
+    test('drove the rover to backward', () => 
+        expect(rover([1, 1], dirs.North, gridSize, 'b')).toEqual({
+            position: [1, 0],
+            direction: dirs.North
+        })
+    );
 })
