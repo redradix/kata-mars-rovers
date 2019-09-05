@@ -1,3 +1,10 @@
+/**
+ * Rotates the rover direction.
+ *
+ * @param {*} position
+ * @param {*} direction
+ * @param {*} command
+ */
 const rotate = (position, direction, command) => {
   const rotation = {
     l: {
@@ -20,6 +27,12 @@ const rotate = (position, direction, command) => {
   };
 };
 
+/**
+ * Determines if the new position is outside grid or not.
+ *
+ * @param {*} newPosition
+ * @param {*} gridSize
+ */
 const isOutsideGrid = (newPosition, gridSize) => {
   return (
     newPosition[0] >= gridSize[0] ||
@@ -29,6 +42,14 @@ const isOutsideGrid = (newPosition, gridSize) => {
   );
 };
 
+/**
+ * Moves the rover to the new position if it doesn't exceed the grid dimensions.
+ *
+ * @param {*} position
+ * @param {*} direction
+ * @param {*} gridSize
+ * @param {*} command
+ */
 const move = (position, direction, gridSize, command) => {
   const movement = {
     f: {
@@ -58,6 +79,14 @@ const move = (position, direction, gridSize, command) => {
   };
 };
 
+/**
+ * Process the rover command.
+ *
+ * @param {*} position
+ * @param {*} direction
+ * @param {*} gridSize
+ * @param {*} command
+ */
 const processCommand = (position, direction, gridSize, command) => {
   switch (command) {
     case 'l':
@@ -71,6 +100,14 @@ const processCommand = (position, direction, gridSize, command) => {
   }
 };
 
+/**
+ * Starts the Mars exploration and returns the rover final position.
+ *
+ * @param {*} initalPosition
+ * @param {*} direction
+ * @param {*} gridSize
+ * @param {*} commands
+ */
 const startExploration = (initalPosition, direction, gridSize, commands) => {
   if (!Array.isArray(commands)) return { position: initalPosition, direction };
 
