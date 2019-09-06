@@ -73,5 +73,5 @@ function getCompass(cmd){
     }
 }
 
-
-module.exports = (initPos, dir, gridSize, cmd) => commandProcesor(initPos, dir, gridSize, cmd);
+//Get the last element from his array
+module.exports = (initPos, dir, gridSize, cmds) => cmds.split("").map(cmd => commandProcesor(initPos, dir, gridSize, cmd)).pop();
