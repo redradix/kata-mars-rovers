@@ -1,55 +1,12 @@
 /**
- * This function process the rover commands
- * @param {Array} pos 
- * @param {String} dir 
- * @param {Array} gridSize 
- * @param {String} cmd 
- */
-function commandProcesor(pos, dir, gridSize, cmd){
-    switch (cmd){
-        case 'l':
-        case 'r':
-            return { 
-                position: pos,
-                direction: getCompass(cmd)[dir]
-            }
-        case 'f':
-        case 'b':
-            return drive(pos, dir, gridSize, cmd)
-        default:
-            return { position: pos, direction: dir }
-    }
-}
-
-
-/**
- * This function drives the rover
- * @param {Array} pos 
- * @param {String} dir 
- * @param {Array} gridSize 
- * @param {String} cmd 
- */
-function drive(pos, dir, gridSize, cmd){
-    const pitch = getCompass(cmd)[dir];
-    const lastPos = [...pos];
-    const isOutOfBounds = (pos, gridSize) => pos[0] >= gridSize[0] || pos[1] >= gridSize[1] || pos[0] < 0 || pos[1] < 0;
-
-    pos.map((position, it) => pos[it] = position + pitch[it]);//Reasign the new cords
-
-    return {
-        position: isOutOfBounds(pos, gridSize) ? lastPos : pos,
-        direction: dir
-    }
-}
-
-
-/**
  * This function returns the direction of rover for a command
- * @param {String} cmd command 
+ * @param {String} cmd command
  * @returns {Object}
  */
 function getCompass(cmd){
     switch (cmd){
+        default:
+            return {};
         case 'r':
             return {
                 North: 'East', East: 'South',
@@ -73,5 +30,63 @@ function getCompass(cmd){
     }
 }
 
-//Get the last element from his array
-module.exports = (initPos, dir, gridSize, cmds) => cmds.split("").map(cmd => commandProcesor(initPos, dir, gridSize, cmd)).pop();
+
+/**
+ * This function gets if the position is out of the bounds
+ * @param {Array} pos pos
+ * @param {Array} gridSize gridSize
+ * @returns {Boolean}
+ */
+function isOutOfBounds(pos, gridSize){
+    return pos[0] >= gridSize[0] || pos[1] >= gridSize[1] || pos[0] < 0 || pos[1] < 0
+}
+
+
+/**
+ * This function drives the rover
+ * @param {Array} pos pos
+ * @param {String} dir dir
+ * @param {String} cmd cmd
+ * @returns {Object}
+ */
+function drive(pos, dir, cmd){
+    const pitch = getCompass(cmd)[dir];
+    const lastPos = [...pos];
+
+    pos.map((position, it) => {
+        pos[it] = position + pitch[it]
+    });
+
+    return {
+        position: isOutOfBounds() ? lastPos : pos,
+        direction: dir
+    }
+}
+
+
+/**
+ * This function process the rover commands
+ * @param {Array} pos pos
+ * @param {String} dir dir
+ * @param {Array} gridSize gridSize
+ * @param {String} cmd cmd
+ * @returns {Object}
+ */
+function commandProcesor(pos, dir, gridSize, cmd){
+    switch (cmd){
+        case 'l':
+        case 'r':
+            return {
+                position: pos,
+                direction: getCompass(cmd)[dir]
+            }
+        case 'f':
+        case 'b':
+            return drive(pos, dir, gridSize, cmd)
+        default:
+            return { position: pos, direction: dir }
+    }
+}
+
+
+module.exports = (pos, dir, gridSize, cmds) => cmds.split('').map(cmd => commandProcesor(pos, dir, gridSize, cmd)).pop()

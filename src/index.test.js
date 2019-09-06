@@ -1,3 +1,4 @@
+/* eslint-disable */
 const rover = require("./index");
 
 describe('Mars Rovers', () => {

@@ -8,5 +8,12 @@
   },
   "devDependencies": {
     "jest": "^24.9"
+  },
+  "dependencies": {
+    "acorn": "^7.0.0",
+    "eslint": "^6.3.0"
+  },
+  "repository": {
+    "url": "https://github.com/redradix/mars-rovers"
   }
 }
