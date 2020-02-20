@@ -5,10 +5,6 @@ const conversionDirectionRight = {
   "E": "S"
 }
 
-function turnRight(facing) {
-  return conversionDirectionRight[facing] || facing
-}
-
 const conversionDirectionLeft = {
   "N": "W",
   "S": "E",
@@ -16,26 +12,40 @@ const conversionDirectionLeft = {
   "E": "N"
 }
 
+const conversionDirection = {
+  "L": conversionDirectionLeft,
+  "R": conversionDirectionRight
+}
+
+function turnRight(facing) {
+  return conversionDirectionRight[facing] || facing
+}
+
 function turnLeft(facing) {
   return conversionDirectionLeft[facing] || facing
 }
 
+function executeTurn(command, facing) {
+  return conversionDirection[command][facing] || facing
+}
+
+function isTurnCommand(command) {
+  return isTurnRightCommand(command)  || isTurnLeftCommand(command)
+}
 function isTurnRightCommand(command) {
   return command === "R"
 }
 
-function isLeftRightCommand(command) {
+function isTurnLeftCommand(command) {
   return command === "L"
 }
 
 function executeCommands(initialPosition, gridSize, commands) {
   let [startX, startY, facing] = initialPosition
   let finalPosition = commands.reduce(([intermediateX, intermediateY, intermediateFacing], command) => {
-    if( isTurnRightCommand(command) ) {
-      return [intermediateX, intermediateY, turnRight(intermediateFacing)]
-    } else if ( isLeftRightCommand(command) ) {
-      return [intermediateX, intermediateY, turnLeft(intermediateFacing)]
-    }else {
+    if( isTurnCommand(command) ) {
+      return [intermediateX, intermediateY, executeTurn(command, intermediateFacing)]
+    } else {
       return [intermediateX, intermediateY, intermediateFacing]
     }
   }, [startX, startY, facing])
