@@ -9,7 +9,7 @@ const generateGridSize = ({x, y} = {x: generateNumber(), y: generateNumber()}) =
 }
 
 const generateFacing = () => {
-  return ['N', 'S', 'E', 'W'][(generateNumber() % 4)]
+  return [MarsApi.directions.NORTH, MarsApi.directions.SOUTH, MarsApi.directions.EAST, MarsApi.directions.WEST][(generateNumber() % 4)]
 }
 
 const generateInitalPosition = ({x, y} = {x: generateNumber(), y: generateNumber()}) => {
@@ -31,81 +31,81 @@ describe('Mars Rovers', () => {
 
     it("We receive the command to turn right while facing to the north so we expect to stay in the same place facing the east", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "N")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.NORTH)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["R"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_RIGHT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "E"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.EAST])
     })
 
     it("We receive the command to turn left while facing to the north so we expect to stay in the same place facing the west", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "N")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.NORTH)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["L"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_LEFT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "W"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.WEST])
     })
 
     it("We receive the command to turn right while facing to the south so we expect to stay in the same place facing the west", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "S")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.SOUTH)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["R"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_RIGHT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "W"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.WEST])
     })
 
     it("We receive the command to turn left while facing to the south so we expect to stay in the same place facing the east", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "S")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.SOUTH)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["L"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_LEFT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "E"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.EAST])
     })
 
     it("We receive the command to turn right while facing to the west so we expect to stay in the same place and face to the north", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "W")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.WEST)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["R"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_RIGHT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "N"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.NORTH])
     })
 
     it("We receive the command to turn left while facing to the west so we expect to stay in the same place facing the south", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "W")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.WEST)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["L"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_LEFT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "S"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.SOUTH])
     })
 
     it("We receive the command to turn right while facing to the east so we expect to stay in the same place and face to the south", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "E")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.EAST)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["R"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_RIGHT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "S"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.SOUTH])
     })
 
     it("We receive the command to turn left while facing to the east so we expect to stay in the same place facing the north", () => {
       const initialCoordinates = generateInitalPosition()
-      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "E")
+      const initialPosition = generateInitalPositionAndFacing(initialCoordinates, MarsApi.directions.EAST)
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["L"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_LEFT])
 
-      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "N"])
+      expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, MarsApi.directions.NORTH])
     })
 
     it("We receive the command to turn right while face to an unknown direction so we expect to stay in the same place and face to the same direction", () => {
       const initialCoordinates = generateInitalPosition()
       const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "X")
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["R"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_RIGHT])
 
       expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "X"])
     })
@@ -114,7 +114,7 @@ describe('Mars Rovers', () => {
       const initialCoordinates = generateInitalPosition()
       const initialPosition = generateInitalPositionAndFacing(initialCoordinates, "X")
 
-      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), ["L"])
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, generateGridSize(), [MarsApi.commands.TURN_LEFT])
 
       expect(marsRoversPosition.position).toStrictEqual([...initialCoordinates, "X"])
     })
