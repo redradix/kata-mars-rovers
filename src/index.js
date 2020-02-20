@@ -12,10 +12,14 @@ const directions = {
 
 const COMMAND_TURN_LEFT = "L"
 const COMMAND_TURN_RIGHT = "R"
+const COMMAND_MOVE_FORWARD = "F"
+const COMMAND_MOVE_BACKWARD = "B"
 
 const commands = {
   "TURN_LEFT": COMMAND_TURN_LEFT,
-  "TURN_RIGHT": COMMAND_TURN_RIGHT
+  "TURN_RIGHT": COMMAND_TURN_RIGHT,
+  "MOVE_FORWARD": COMMAND_MOVE_FORWARD,
+  "MOVE_BACKWARD": COMMAND_MOVE_BACKWARD
 }
 
 const conversionDirectionRight = {
@@ -52,6 +56,10 @@ function isTurnLeftCommand(command) {
   return command === COMMAND_TURN_LEFT
 }
 
+function isMoveCommand(command) {
+  return isMoveBackwardCommand(command) || isMoveForwardCommand(command)
+}
+
 function isMoveForwardCommand(command) {
   return command === "F"
 }
@@ -74,14 +82,15 @@ const backwardFunctions = {
   [EAST]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition, yAxisPosition - 1, facing]
 }
 
-const identity = (value) => value
-
-function moveForward([xAxisPosition, yAxisPosition, facing]) {
-  return (forwardFunctions[facing] || identity)([xAxisPosition, yAxisPosition, facing])
+const moveFunctions = {
+  [COMMAND_MOVE_FORWARD] : forwardFunctions,
+  [COMMAND_MOVE_BACKWARD] : backwardFunctions
 }
 
-function moveBackward([xAxisPosition, yAxisPosition, facing]) {
-  return (backwardFunctions[facing] || identity)([xAxisPosition, yAxisPosition, facing])
+const identity = (value) => value
+
+function executeMove(command, [xAxisPosition, yAxisPosition, facing]) {
+  return (moveFunctions[command][facing] || identity)([xAxisPosition, yAxisPosition, facing])
 }
 
 function executeCommands(initialPosition, gridSize, commands) {
@@ -89,10 +98,8 @@ function executeCommands(initialPosition, gridSize, commands) {
   let finalPosition = commands.reduce(([intermediateX, intermediateY, intermediateFacing], command) => {
     if( isTurnCommand(command) ) {
       return [intermediateX, intermediateY, executeTurn(command, intermediateFacing)]
-    } else if ( isMoveForwardCommand(command) ) {
-      return moveForward([intermediateX, intermediateY, intermediateFacing])
-    } else if ( isMoveBackwardCommand(command) ) {
-      return moveBackward([intermediateX, intermediateY, intermediateFacing])
+    } else if ( isMoveCommand(command) ) {
+      return executeMove(command, [intermediateX, intermediateY, intermediateFacing])
     } else {
       return [intermediateX, intermediateY, intermediateFacing]
     }
