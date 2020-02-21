@@ -69,17 +69,73 @@ function isMoveBackwardCommand(command) {
 }
 
 const forwardFunctions = {
-  [NORTH]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition + 1, yAxisPosition, facing],
-  [SOUTH]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition - 1, yAxisPosition, facing],
-  [WEST]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition, yAxisPosition - 1, facing],
-  [EAST]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition, yAxisPosition + 1, facing]
+  [NORTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
+    let finalXAxisPostion = xAxisPosition - 1
+    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
+      return [finalXAxisPostion, yAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [SOUTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
+    let finalXAxisPostion = xAxisPosition + 1
+    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
+      return [finalXAxisPostion, yAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [WEST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
+    let finalYAxisPosition = yAxisPosition - 1
+    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
+      return [xAxisPosition, finalYAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [EAST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
+    let finalYAxisPosition = yAxisPosition + 1
+    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
+      return [xAxisPosition, finalYAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  }
 }
 
 const backwardFunctions = {
-  [NORTH]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition - 1, yAxisPosition, facing],
-  [SOUTH]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition + 1, yAxisPosition, facing],
-  [WEST]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition, yAxisPosition + 1, facing],
-  [EAST]: ([xAxisPosition, yAxisPosition, facing]) => [xAxisPosition, yAxisPosition - 1, facing]
+  [NORTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
+    let finalXAxisPostion = xAxisPosition + 1
+    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
+      return [finalXAxisPostion, yAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [SOUTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
+    let finalXAxisPostion = xAxisPosition - 1
+    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
+      return [finalXAxisPostion, yAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [WEST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
+    let finalYAxisPosition = yAxisPosition + 1
+    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
+      return [xAxisPosition, finalYAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  },
+  [EAST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
+    let finalYAxisPosition = yAxisPosition - 1
+    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
+      return [xAxisPosition, finalYAxisPosition, facing]
+    } else {
+      return [xAxisPosition, yAxisPosition, facing]
+    }
+  }
 }
 
 const moveFunctions = {
@@ -89,8 +145,8 @@ const moveFunctions = {
 
 const identity = (value) => value
 
-function executeMove(command, [xAxisPosition, yAxisPosition, facing]) {
-  return (moveFunctions[command][facing] || identity)([xAxisPosition, yAxisPosition, facing])
+function executeMove(command, [xAxisPosition, yAxisPosition, facing], gridSize) {
+  return (moveFunctions[command][facing] || identity)([xAxisPosition, yAxisPosition, facing], gridSize)
 }
 
 function executeCommands(initialPosition, gridSize, commands) {
@@ -99,7 +155,7 @@ function executeCommands(initialPosition, gridSize, commands) {
     if( isTurnCommand(command) ) {
       return [intermediateX, intermediateY, executeTurn(command, intermediateFacing)]
     } else if ( isMoveCommand(command) ) {
-      return executeMove(command, [intermediateX, intermediateY, intermediateFacing])
+      return executeMove(command, [intermediateX, intermediateY, intermediateFacing], gridSize)
     } else {
       return [intermediateX, intermediateY, intermediateFacing]
     }

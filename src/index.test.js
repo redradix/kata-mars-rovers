@@ -17,6 +17,26 @@ describe("Mars Rovers", () => {
 
       expect(marsRoversPosition.position).toStrictEqual(initialPosition)
     })
+
+    it("We receive an array of comamnds, some are unknown but another are recognizable, and another is going to be impossible to execute due the limits of the grid", () => {
+      const initialPosition = [0, 0, MarsApi.directions.NORTH]
+      const comamnds = [
+        MarsApi.commands.TURN_RIGHT,
+        MarsApi.commands.MOVE_BACKWARD,
+        MarsApi.commands.MOVE_FORWARD,
+        MarsApi.commands.MOVE_FORWARD,
+        MarsApi.commands.TURN_RIGHT,
+        MarsApi.commands.MOVE_FORWARD,
+        MarsApi.commands.TURN_LEFT,
+        MarsApi.commands.MOVE_FORWARD,
+        MarsApi.commands.TURN_RIGHT,
+        MarsApi.commands.MOVE_FORWARD
+      ]
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, [3, 3], comamnds)
+
+      expect(marsRoversPosition.position).toStrictEqual([2, 2, MarsApi.directions.SOUTH])
+    })
     describe("Turn commands", () => {
 
       it("We receive the command to turn right while facing to the north so we expect to stay in the same place facing the east", () => {
@@ -115,43 +135,43 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.NORTH)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_FORWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_FORWARD])
 
-        expect(finalPosition.position).toStrictEqual([initialX + 1, initialY, MarsApi.directions.NORTH])
+        expect(finalPosition.position).toStrictEqual([initialX - 1, initialY, MarsApi.directions.NORTH])
       })
 
       it("We receive move backward command and facing the north, so we expect to move backward in the x axis and facing the north", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.NORTH)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_BACKWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_BACKWARD])
 
-        expect(finalPosition.position).toStrictEqual([initialX - 1, initialY, MarsApi.directions.NORTH])
+        expect(finalPosition.position).toStrictEqual([initialX + 1, initialY, MarsApi.directions.NORTH])
       })
 
       it("We receive move forward command and facing the south, so we expect to move backward in the x axis and facing the south", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.SOUTH)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_FORWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_FORWARD])
 
-        expect(finalPosition.position).toStrictEqual([initialX - 1, initialY, MarsApi.directions.SOUTH])
+        expect(finalPosition.position).toStrictEqual([initialX + 1, initialY, MarsApi.directions.SOUTH])
       })
 
       it("We receive move backward command and facing the south, so we expect to move forward in the x axis and facing the south", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.SOUTH)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_BACKWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_BACKWARD])
 
-        expect(finalPosition.position).toStrictEqual([initialX + 1, initialY, MarsApi.directions.SOUTH])
+        expect(finalPosition.position).toStrictEqual([initialX - 1, initialY, MarsApi.directions.SOUTH])
       })
 
       it("We receive move forward command and facing the east, so we expect to move forward in the y axis and facing the east", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.EAST)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_FORWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_FORWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY + 1, MarsApi.directions.EAST])
       })
@@ -160,7 +180,7 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.EAST)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_BACKWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_BACKWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY - 1, MarsApi.directions.EAST])
       })
@@ -169,7 +189,7 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.WEST)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_FORWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_FORWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY - 1, MarsApi.directions.WEST])
       })
@@ -178,7 +198,7 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], MarsApi.directions.WEST)
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_BACKWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_BACKWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY + 1, MarsApi.directions.WEST])
       })
@@ -187,7 +207,7 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], "X")
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_FORWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_FORWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY, "X"])
       })
@@ -196,10 +216,82 @@ describe("Mars Rovers", () => {
         const [initialX, initialY] = generators.generateInitalPosition()
         const initialPosition = generators.generateInitalPositionAndFacing([initialX, initialY], "X")
 
-        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize(), [MarsApi.commands.MOVE_BACKWARD])
+        const finalPosition = MarsApi.executeCommands(initialPosition, generators.generateGridSize({x: initialPosition[0] + 2, y: initialPosition[1] + 2}), [MarsApi.commands.MOVE_BACKWARD])
 
         expect(finalPosition.position).toStrictEqual([initialX, initialY , "X"])
       })
+    })
+
+    it("Impossible to move forward due we are on the limit of the grid facing the north", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.NORTH)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_FORWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move backward due we are on the limit of the grid facing the north", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.NORTH)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_BACKWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move forward due we are on the limit of the grid facing the south", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.SOUTH)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_FORWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move forward due we are on the limit of the grid facing the south", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.SOUTH)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_BACKWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move forward due we are on the limit of the grid facing the east", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.EAST)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_FORWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move backward due we are on the limit of the grid facing the east", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.EAST)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_BACKWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move forward due we are on the limit of the grid facing the west", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.WEST)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_FORWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
+    })
+
+    it("Impossible to move backward due we are on the limit of the grid facing the west", () => {
+      const grid = generators.generateGridSize({x:1, y:1})
+      const initialPosition = generators.generateInitalPositionAndFacing([0, 0], MarsApi.directions.WEST)
+
+      const marsRoversPosition = MarsApi.executeCommands(initialPosition, grid, [MarsApi.commands.MOVE_BACKWARD])
+
+      expect(marsRoversPosition.position).toStrictEqual(initialPosition)
     })
 
 })
