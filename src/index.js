@@ -68,73 +68,51 @@ function isMoveBackwardCommand(command) {
   return command === "B"
 }
 
+const checkPosition = (newPosition, position, limit) => {
+  if (newPosition > -1 && newPosition < limit) {
+    return newPosition
+  } else {
+    return position
+  }
+}
+
+const incrementPosition = (position, limit) => {
+  let finalPosition = position + 1
+  return checkPosition(finalPosition, position, limit)
+}
+
+const decrementPosition = (position, limit) => {
+  let finalPosition = position - 1
+  return checkPosition(finalPosition, position, limit)
+}
+
 const forwardFunctions = {
   [NORTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
-    let finalXAxisPostion = xAxisPosition - 1
-    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
-      return [finalXAxisPostion, yAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [decrementPosition(xAxisPosition, rows), yAxisPosition, facing]
   },
   [SOUTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
-    let finalXAxisPostion = xAxisPosition + 1
-    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
-      return [finalXAxisPostion, yAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [incrementPosition(xAxisPosition, rows), yAxisPosition, facing]
   },
   [WEST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
-    let finalYAxisPosition = yAxisPosition - 1
-    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
-      return [xAxisPosition, finalYAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [xAxisPosition, decrementPosition(yAxisPosition, columns), facing]
   },
   [EAST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
-    let finalYAxisPosition = yAxisPosition + 1
-    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
-      return [xAxisPosition, finalYAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [xAxisPosition, incrementPosition(yAxisPosition, columns), facing]
   }
 }
 
 const backwardFunctions = {
   [NORTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
-    let finalXAxisPostion = xAxisPosition + 1
-    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
-      return [finalXAxisPostion, yAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [incrementPosition(xAxisPosition, rows), yAxisPosition, facing]
   },
   [SOUTH]: ([xAxisPosition, yAxisPosition, facing], [rows]) => {
-    let finalXAxisPostion = xAxisPosition - 1
-    if (finalXAxisPostion > -1 && finalXAxisPostion < rows) {
-      return [finalXAxisPostion, yAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [decrementPosition(xAxisPosition, rows), yAxisPosition, facing]
   },
   [WEST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
-    let finalYAxisPosition = yAxisPosition + 1
-    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
-      return [xAxisPosition, finalYAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [xAxisPosition, incrementPosition(yAxisPosition, columns), facing]
   },
   [EAST]: ([xAxisPosition, yAxisPosition, facing], [, columns]) => {
-    let finalYAxisPosition = yAxisPosition - 1
-    if (finalYAxisPosition > -1 && finalYAxisPosition < columns) {
-      return [xAxisPosition, finalYAxisPosition, facing]
-    } else {
-      return [xAxisPosition, yAxisPosition, facing]
-    }
+    return [xAxisPosition, decrementPosition(yAxisPosition, columns), facing]
   }
 }
 
