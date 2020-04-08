@@ -1,8 +1,12 @@
 const move = require('./index')
 
 describe('Mars Rovers', () => {
-  it('When facing north and moving fordward, increase the y coord', () => {
+  it('When facing north and moving fordward, increase the y coord (1)', () => {
     expect(move([1, 1, 'N'], 7, 'f')).toEqual([1, 2, 'N'])
+  })
+
+  it('When facing north and moving fordward, increase the y coord (2)', () => {
+    expect(move([2, 2, 'N'], 7, 'f')).toEqual([2, 3, 'N'])
   })
 
   it('When facing east and moving fordward, increase the x coord', () => {
