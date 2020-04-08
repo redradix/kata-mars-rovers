@@ -21,4 +21,9 @@ describe('Mars Rovers', () => {
     expect(move([2, 2, 'W'], 'f')).toEqual([1, 2, 'W'])
   })
 
+  it('When facing north and moving backward, decreases Y', () => {
+    expect(move([1, 1, 'N'], 'b')).toEqual([1, 0, 'N'])
+    expect(move([2, 2, 'N'], 'b')).toEqual([2, 1, 'N'])
+  })
+
 })
