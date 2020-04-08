@@ -10,7 +10,7 @@ const move = (initialPosition) => {
   }
 
   if (orientation === 'W') {
-    return [1, 2, orientation]
+    return [x-1, y, orientation]
   }
 
   return [x, y+1, orientation]
