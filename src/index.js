@@ -13,6 +13,10 @@ const move = (initialPosition, command) => {
     if (orientation === 'S') {
       return [x, y+1, orientation]
     }
+
+    if (orientation === 'W') {
+      return [x+1, y, orientation]
+    }
   }
 
   if (orientation === 'E') {
