@@ -4,41 +4,43 @@ const move = (initialPosition, command) => {
 
   if (command === 'b') {
     if (orientation === 'N') {
-      variation = {x: 0, y: -1}
+      variation = [0, -1]
     }
 
     if (orientation === 'E') {
-      variation = {x: -1, y: 0}
+      variation = [-1, 0]
     }
 
     if (orientation === 'S') {
-      variation = {x: 0, y: 1}
+      variation = [0, 1]
     }
 
     if (orientation === 'W') {
-      variation = {x: 1, y: 0}
+      variation = [1, 0]
     }
   }
   
   if (command === 'f') {
     if (orientation === 'E') {
-      variation = {x: 1, y: 0}
+      variation = [1, 0]
     }
     
     if (orientation === 'S') {
-      variation = {x: 0, y: -1}
+      variation = [0, -1]
     }
   
     if (orientation === 'W') {
-      variation = {x: -1, y: 0}
+      variation = [-1, 0]
     }
   
     if (orientation === 'N') {
-      variation = {x: 0, y: 1}
+      variation = [0, 1]
     }
   }
 
-  return [x + variation.x, y + variation.y, orientation]
+  const [variationX, variationY] = variation
+
+  return [x + variationX, y + variationY, orientation]
 }
 
 module.exports = move
