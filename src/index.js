@@ -13,7 +13,9 @@ const move = (initialPosition) => {
     return [x-1, y, orientation]
   }
 
-  return [x, y+1, orientation]
+  if (orientation === 'N') {
+    return [x, y+1, orientation]
+  }
 }
 
 module.exports = move
