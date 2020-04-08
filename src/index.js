@@ -3,36 +3,44 @@ const move = (initialPosition, command) => {
 
   if (command === 'b') {
     if (orientation === 'N') {
-      return [x, y-1, orientation]
+      const variation = -1
+      return [x, y + variation, orientation]
     }
 
     if (orientation === 'E') {
-      return [x-1, y, orientation]
+      const variation = -1
+      return [x + variation, y, orientation]
     }
 
     if (orientation === 'S') {
-      return [x, y+1, orientation]
+      const variation = 1
+      return [x, y + variation, orientation]
     }
 
     if (orientation === 'W') {
-      return [x+1, y, orientation]
+      const variation = 1
+      return [x + variation, y, orientation]
     }
   }
 
   if (orientation === 'E') {
-    return [x+1, y, orientation]
+    const variation = 1
+    return [x + variation, y, orientation]
   }
   
   if (orientation === 'S') {
-    return [x, y-1, orientation]
+    const variation = -1
+    return [x, y + variation, orientation]
   }
 
   if (orientation === 'W') {
-    return [x-1, y, orientation]
+    const variation = -1
+    return [x + variation, y, orientation]
   }
 
   if (orientation === 'N') {
-    return [x, y+1, orientation]
+    const variation = 1
+    return [x, y + variation, orientation]
   }
 }
 
