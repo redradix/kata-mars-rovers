@@ -1,7 +1,5 @@
 const move = (initialPosition) => {
-  const orientation = initialPosition[2]
-  const y = initialPosition[1]
-  const x = initialPosition[0]
+  const [x, y, orientation] = initialPosition
 
   if (orientation === 'E') {
     return [2, 1, 'E']
