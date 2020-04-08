@@ -6,7 +6,7 @@ const move = (initialPosition) => {
   }
   
   if (orientation === 'S') {
-    return [1, 0, orientation]
+    return [x, y-1, orientation]
   }
 
   if (orientation === 'W') {
