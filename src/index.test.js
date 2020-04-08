@@ -17,12 +17,20 @@ describe('Mars Rovers', () => {
     expect(move([2, 2, 'E'], 7, 'f')).toEqual([3, 2, 'E'])
   })
 
-  it('When facing south and moving fordward, decrease the y coord', () => {
+  it('When facing south and moving fordward, decrease the y coord (1)', () => {
     expect(move([1, 1, 'S'], 7, 'f')).toEqual([1, 0, 'S'])
   })
 
-  it('When facing west and moving fordward, increase the y coord', () => {
-    expect(move([1, 1, 'W'], 7, 'f')).toEqual([1, 2, 'W'])
+  it('When facing south and moving fordward, decrease the y coord (2)', () => {
+    expect(move([2, 2, 'S'], 7, 'f')).toEqual([2, 1, 'S'])
+  })
+
+  it('When facing west and moving fordward, decrease the x coord (1)', () => {
+    expect(move([1, 1, 'W'], 7, 'f')).toEqual([0, 1, 'W'])
+  })
+
+  it('When facing west and moving fordward, decrease the x coord (2)', () => {
+    expect(move([2, 2, 'W'], 7, 'f')).toEqual([1, 2, 'W'])
   })
 
 })
