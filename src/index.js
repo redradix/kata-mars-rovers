@@ -5,6 +5,10 @@ const move = (initialPosition, command) => {
     if (orientation === 'N') {
       return [x, y-1, orientation]
     }
+
+    if (orientation === 'E') {
+      return [x-1, y, orientation]
+    }
   }
 
   if (orientation === 'E') {
