@@ -2,7 +2,7 @@ const move = (initialPosition) => {
   const [x, y, orientation] = initialPosition
 
   if (orientation === 'E') {
-    return [2, 1, 'E']
+    return [x+1, y, 'E']
   }
   
   if (orientation === 'S') {
