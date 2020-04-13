@@ -14,44 +14,27 @@ const move = (initialPosition, command) => {
     }
   }
 
+  const VARIATIONS = {
+    f: {
+      N: [0, 1],
+      S: [0, -1],
+      E: [1, 0],
+      W: [-1, 0]
+    },
+    b: {
+      N: [0, -1],
+      S: [0, 1],
+      E: [-1, 0],
+      W: [1, 0]
+    }
+  }
+
   const [x, y, orientation] = initialPosition
   let variation = [0, 0]
   let newOrientation = orientation
-
-  if (command === 'b') {
-    if (orientation === 'N') {
-      variation = [0, -1]
-    }
-
-    if (orientation === 'E') {
-      variation = [-1, 0]
-    }
-
-    if (orientation === 'S') {
-      variation = [0, 1]
-    }
-
-    if (orientation === 'W') {
-      variation = [1, 0]
-    }
-  }
   
-  if (command === 'f') {
-    if (orientation === 'E') {
-      variation = [1, 0]
-    }
-    
-    if (orientation === 'S') {
-      variation = [0, -1]
-    }
-  
-    if (orientation === 'W') {
-      variation = [-1, 0]
-    }
-  
-    if (orientation === 'N') {
-      variation = [0, 1]
-    }
+  if (command === 'f' || command === 'b') {
+    variation = VARIATIONS[command][orientation]
   }
 
   if (command === 'l' || command === 'r') {
