@@ -81,6 +81,11 @@ describe('Mars Rovers', () => {
       title: "Move BACKWARD when direction is WEST should increase X",
       input: [[2, 2, 'W'], 'b'],
       output: [3, 2, 'W']
+    },
+    {
+      title: "Turn LEFT when direction is NORTH should set direction to WEST",
+      input: [0, 0, 'N', 'l'],
+      output: [0, 0, 'W']
     }
   ]
 
