@@ -57,6 +57,10 @@ const move = (initialPosition, command) => {
     }
   }
 
+  if (command === 'r') {
+    newOrientation = 'E'
+  }
+
   const [variationX, variationY] = variation
 
   return [x + variationX, y + variationY, newOrientation]
