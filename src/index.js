@@ -1,6 +1,7 @@
 const move = (initialPosition, command) => {
   const [x, y, orientation] = initialPosition
-  let variation
+  let variation = [0, 0]
+  let newOrientation = orientation
 
   if (command === 'b') {
     if (orientation === 'N') {
@@ -38,9 +39,13 @@ const move = (initialPosition, command) => {
     }
   }
 
+  if (command === 'l') {
+    newOrientation = 'W'
+  }
+
   const [variationX, variationY] = variation
 
-  return [x + variationX, y + variationY, orientation]
+  return [x + variationX, y + variationY, newOrientation]
 }
 
 module.exports = move
