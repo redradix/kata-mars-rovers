@@ -1,3 +1,6 @@
+const isMoving = command => command === 'f' || command === 'b'
+const isTurning = command => command === 'l' || command === 'r'
+
 const move = (initialPosition, command) => {
   const TURNED_ORIENTATIONS = {
     l: {
@@ -33,11 +36,11 @@ const move = (initialPosition, command) => {
   let variation = [0, 0]
   let newOrientation = orientation
   
-  if (command === 'f' || command === 'b') {
+  if (isMoving(command)) {
     variation = VARIATIONS[command][orientation]
   }
 
-  if (command === 'l' || command === 'r') {
+  if (isTurning(command)) {
     newOrientation = TURNED_ORIENTATIONS[command][orientation]
   }
 
