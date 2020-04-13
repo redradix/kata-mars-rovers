@@ -69,6 +69,10 @@ const move = (initialPosition, command) => {
     if (orientation === 'E') {
       newOrientation = 'S'
     }
+
+    if (orientation === 'W') {
+      newOrientation = 'N'
+    }
   }
 
   const [variationX, variationY] = variation
