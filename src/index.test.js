@@ -91,6 +91,11 @@ describe('Mars Rovers', () => {
       title: "Turn LEFT when direction is SOUTH should set direction to EAST",
       input: [[0, 0, 'S'], 'l'],
       output: [0, 0, 'E']
+    },
+    {
+      title: "Turn LEFT when direction is EAST should set direction to NORTH",
+      input: [[0, 0, 'E'], 'l'],
+      output: [0, 0, 'N']
     }
   ]
 
