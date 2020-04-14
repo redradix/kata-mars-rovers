@@ -136,6 +136,11 @@ describe('Mars Rovers', () => {
       title: "Move and turn with multiple commands",
       input: [[0, 0, 'E'], 'fffrffblfrb'],
       output: [4, 0, 'S']
+    }, 
+    {
+      title: "Move shouldn't be allowed when it's going out of limit",
+      input: [[0, 0], 'W'],
+      output: [0, 0, 'W']
     }
   ]
 
