@@ -39,16 +39,29 @@ const getVariation = (command, orientation) => {
   return VARIATIONS[command][orientation]
 }
 
-const move = (initialPosition, commands) => {
+const move = (initialPosition, commands, gridSize) => {
   const [x, y, orientation] = initialPosition
-  let variation = [0, 0]
   let newOrientation = orientation
+  let newPosition = [x, y]
 
   commands.split('').forEach(command => {
     if (isMoving(command)) {
-      const newVariation = getVariation(command, orientation)
-      variation[0] += newVariation[0]
-      variation[1] += newVariation[1]
+      const [variationX, variationY] = getVariation(command, orientation)
+
+      newPosition = [newPosition[0] + variationX, newPosition[1] + variationY]
+
+      if (newPosition[0] > gridSize) {
+        newPosition[0] = gridSize
+      }
+      if (newPosition[0] < 0) {
+        newPosition[0] = 0
+      }
+      if (newPosition[1] > gridSize) {
+        newPosition[1] = gridSize
+      }
+      if (newPosition[1] < 0) {
+        newPosition[1] = 0
+      }
     }
 
     if (isTurning(command)) {
@@ -56,9 +69,7 @@ const move = (initialPosition, commands) => {
     }
   })
   
-  const [variationX, variationY] = variation
-
-  return [x + variationX, y + variationY, newOrientation]
+  return [...newPosition, newOrientation]
 }
 
 module.exports = move
