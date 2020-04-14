@@ -52,7 +52,7 @@ const move = (initialPosition, commands) => {
     }
 
     if (isTurning(command)) {
-      newOrientation = getTurnedOrientation(command, orientation)
+      newOrientation = getTurnedOrientation(command, newOrientation)
     }
   })
   
