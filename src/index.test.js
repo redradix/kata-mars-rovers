@@ -126,6 +126,11 @@ describe('Mars Rovers', () => {
       title: "Move with multiple commands",
       input: [[0, 0, 'N'], 'ffffbbf'],
       output: [0, 3, 'N']
+    }, 
+    {
+      title: "Turn with multiple commands", 
+      input: [[0, 0, 'N'], 'rlrlllr'],
+      output: [0, 0, 'W']
     }
   ]
 
