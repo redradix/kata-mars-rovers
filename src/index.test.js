@@ -139,7 +139,7 @@ describe('Mars Rovers', () => {
     }, 
     {
       title: "Move shouldn't be allowed when it's going out of limit",
-      input: [[0, 0], 'W'],
+      input: [[0, 0, 'W'], 'f', 7],
       output: [0, 0, 'W']
     }
   ]
