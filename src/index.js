@@ -1,7 +1,7 @@
 const isMoving = command => command === 'f' || command === 'b'
 const isTurning = command => command === 'l' || command === 'r'
 
-const move = (initialPosition, commands) => {
+const getTurnedOrientation = (command, orientation) => {
   const TURNED_ORIENTATIONS = {
     l: {
       N: 'W',
@@ -17,6 +17,10 @@ const move = (initialPosition, commands) => {
     }
   }
 
+  return TURNED_ORIENTATIONS[command][orientation]
+}
+
+const getVariation = (command, orientation) => {
   const VARIATIONS = {
     f: {
       N: [0, 1],
@@ -32,19 +36,23 @@ const move = (initialPosition, commands) => {
     }
   }
 
+  return VARIATIONS[command][orientation]
+}
+
+const move = (initialPosition, commands) => {
   const [x, y, orientation] = initialPosition
   let variation = [0, 0]
   let newOrientation = orientation
 
   commands.split('').forEach(command => {
     if (isMoving(command)) {
-      const newVariation = VARIATIONS[command][orientation]
+      const newVariation = getVariation(command, orientation)
       variation[0] += newVariation[0]
       variation[1] += newVariation[1]
     }
 
     if (isTurning(command)) {
-      newOrientation = TURNED_ORIENTATIONS[command][orientation]
+      newOrientation = getTurnedOrientation(command, orientation)
     }
   })
   
