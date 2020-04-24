@@ -1,43 +1,41 @@
+const VARIATIONS = {
+  f: {
+    N: [0, 1],
+    S: [0, -1],
+    E: [1, 0],
+    W: [-1, 0]
+  },
+  b: {
+    N: [0, -1],
+    S: [0, 1],
+    E: [-1, 0],
+    W: [1, 0]
+  }
+}
+
+const TURNED_ORIENTATIONS = {
+  l: {
+    N: 'W',
+    S: 'E',
+    E: 'N',
+    W: 'S'
+  }, 
+  r: {
+    N: 'E',
+    S: 'W',
+    E: 'S',
+    W: 'N'
+  }
+}
+
 const isMoving = command => command === 'f' || command === 'b'
 const isTurning = command => command === 'l' || command === 'r'
 
-const getTurnedOrientation = (command, orientation) => {
-  const TURNED_ORIENTATIONS = {
-    l: {
-      N: 'W',
-      S: 'E',
-      E: 'N',
-      W: 'S'
-    }, 
-    r: {
-      N: 'E',
-      S: 'W',
-      E: 'S',
-      W: 'N'
-    }
-  }
+const getTurnedOrientation = (command, orientation) => 
+  TURNED_ORIENTATIONS[command][orientation]
 
-  return TURNED_ORIENTATIONS[command][orientation]
-}
-
-const getVariation = (command, orientation) => {
-  const VARIATIONS = {
-    f: {
-      N: [0, 1],
-      S: [0, -1],
-      E: [1, 0],
-      W: [-1, 0]
-    },
-    b: {
-      N: [0, -1],
-      S: [0, 1],
-      E: [-1, 0],
-      W: [1, 0]
-    }
-  }
-
-  return VARIATIONS[command][orientation]
-}
+const getVariation = (command, orientation) => 
+  VARIATIONS[command][orientation]
 
 const getNewCoordinate = (coordinate, variation, gridSize) => {
   const [x, y] = coordinate
