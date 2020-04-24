@@ -146,13 +146,17 @@ describe('Mars Rovers', () => {
       title: "Skips unknown commands",
       input: [[0, 0, 'W'], 'z', 7],
       output: [0, 0, 'W']
-    }
+    },
   ]
 
   samples.forEach(sample => {
     it(sample.title, () => {
       expect(move(...sample.input)).toEqual(sample.output)
     })
+  })
+
+  it("Throws errors when unknown orientation", () => {
+    expect(() => move([0, 0, 'A'], 'f', 7)).toThrow("Invalid orientation")
   })
 
 })
