@@ -61,8 +61,8 @@ const move = (position, commands, gridSize) => {
 
   const [command, ...rest] = commands.split('')
 
-  const coordinate = [position[0], position[1]]
-  const orientation = position[2]
+  const [x, y, orientation] = position
+  const coordinate = [x, y]
 
   if (isMoving(command)) {
     const variation = getVariation(command, orientation)
