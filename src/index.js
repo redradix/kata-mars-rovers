@@ -72,6 +72,8 @@ const move = (position, commands, gridSize) => {
     const newOrientation = getTurnedOrientation(command, orientation)
     return move([...coordinate, newOrientation], rest.join(''), gridSize)
   }
+
+  return move(position, rest.join(''), gridSize)
 }
 
 module.exports = move
