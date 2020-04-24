@@ -39,26 +39,26 @@ const getVariation = (command, orientation) => {
   return VARIATIONS[command][orientation]
 }
 
-const getNewCoordinate = (prevCoordinate, variation, gridSize) => {
-  const [prevCoordinateX, prevCoordinateY] = prevCoordinate
+const getNewCoordinate = (coordinate, variation, gridSize) => {
+  const [x, y] = coordinate
   const [variationX, variationY] = variation
 
-  let [newCoordinateX, newCoordinateY] = [prevCoordinateX + variationX, prevCoordinateY + variationY]
+  let [newX, newY] = [x + variationX, y + variationY]
 
-  if (newCoordinateX > gridSize || newCoordinateX < 0) {
-    newCoordinateX = prevCoordinateX
+  if (newX > gridSize || newX < 0) {
+    newX = x
   }
   
-  if (newCoordinateY > gridSize || newCoordinateY < 0) {
-    newCoordinateY = prevCoordinateY
+  if (newY > gridSize || newY < 0) {
+    newY = y
   }
 
-  return [newCoordinateX, newCoordinateY]
+  return [newX, newY]
 }
 
 const move = (position, commands, gridSize) => {
   if (!commands.length) return position
-
+ 
   const [command, ...rest] = commands.split('')
 
   const [x, y, orientation] = position
