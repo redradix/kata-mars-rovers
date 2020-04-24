@@ -28,8 +28,13 @@ const TURNED_ORIENTATIONS = {
   }
 }
 
+const ORIENTATIONS = ['N', 'S', 'E', 'W']
+
 const isMoving = command => command === 'f' || command === 'b'
 const isTurning = command => command === 'l' || command === 'r'
+
+const isValidOrientation = orientation => 
+  ORIENTATIONS.includes(orientation)
 
 const getTurnedOrientation = (command, orientation) => 
   TURNED_ORIENTATIONS[command][orientation]
@@ -61,6 +66,8 @@ const move = (position, commands, gridSize) => {
 
   const [x, y, orientation] = position
   const coordinate = [x, y]
+
+  if (!isValidOrientation(orientation)) throw new Error("Invalid orientation")
 
   if (isMoving(command)) {
     const variation = getVariation(command, orientation)
