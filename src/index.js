@@ -56,22 +56,24 @@ const getNewCoordinate = (prevCoordinate, variation, gridSize) => {
   return [newCoordinateX, newCoordinateY]
 }
 
-const move = (initialPosition, commands, gridSize) => {
-  return commands.split('').reduce((position, command) => {
-    const coordinate = [position[0], position[1]]
-    const orientation = position[2]
+const move = (position, commands, gridSize) => {
+  if (!commands.length) return position
 
-    if (isMoving(command)) {
-      const variation = getVariation(command, orientation)
-      const newCoordinate = getNewCoordinate(coordinate, variation, gridSize)
-      return [...newCoordinate, orientation]
-    }
+  const [command, ...rest] = commands.split('')
 
-    if (isTurning(command)) {
-      const newOrientation = getTurnedOrientation(command, orientation)
-      return [...coordinate, newOrientation]
-    }
-  }, initialPosition)
+  const coordinate = [position[0], position[1]]
+  const orientation = position[2]
+
+  if (isMoving(command)) {
+    const variation = getVariation(command, orientation)
+    const newCoordinate = getNewCoordinate(coordinate, variation, gridSize)
+    return move([...newCoordinate, orientation], rest.join(''), gridSize)
+  }
+
+  if (isTurning(command)) {
+    const newOrientation = getTurnedOrientation(command, orientation)
+    return move([...coordinate, newOrientation], rest.join(''), gridSize)
+  }
 }
 
 module.exports = move
