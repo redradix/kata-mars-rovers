@@ -24,6 +24,19 @@ const moveForward = (facing, [ x, y ]) => {
   }
 }
 
+const moveBackward = (facing, [ x, y ]) => {
+  switch(facing) {
+    case DIRECTIONS.SOUTH:
+      return [ x, y - 1 ]
+    case DIRECTIONS.NORTH:
+      return [ x, y + 1 ]
+    case DIRECTIONS.EAST:
+      return [ x - 1, y ]
+    case DIRECTIONS.WEST:
+      return [ x + 1, y ]
+  }
+}
+
 function createRoverCommander (gridSize, initialPosition, initialFacing) {
   if (!isInGrid(gridSize, initialPosition))
     throw new Error('Initial position is not inside grid boundaries')
@@ -34,6 +47,8 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
 
     if (commands === 'f') {
       position = moveForward(facing, position)
+    } else if (commands === 'b') {
+      position = moveBackward(facing, position)
     }
 
     return {
