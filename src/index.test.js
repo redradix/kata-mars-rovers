@@ -52,4 +52,20 @@ describe('Mars Rovers', () => {
       exampleFacing,
     )).toThrow()
   })
+
+  test('moves forward to the south', () => {
+    const commands = 'f'
+    const facing = DIRECTIONS.SOUTH
+    const initialPosition = [0, 0]
+    const expectedPosition = [0, 1]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      facing,
+    )
+    const { position } = roverCommander(commands)
+
+    expect(position).toBe(expectedPosition)
+  })
 })
