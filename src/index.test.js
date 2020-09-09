@@ -1,9 +1,10 @@
 const { createRoverCommander, DIRECTIONS } = require('./index')
+const { NORTH, EAST, SOUTH, WEST } = DIRECTIONS
 
 describe('Mars Rovers', () => {
   const exampleGridSize = [10, 10]
   const exampleInitialPosition = [0, 0]
-  const exampleFacing = DIRECTIONS.SOUTH
+  const exampleFacing = SOUTH
 
   test('faces the initial facing when no command is given', () => {
     const expectedFacing = Object.values(DIRECTIONS)
@@ -55,7 +56,7 @@ describe('Mars Rovers', () => {
 
   test('moves forward to the south', () => {
     const commands = 'f'
-    const facing = DIRECTIONS.SOUTH
+    const facing = SOUTH
     const initialPosition = [0, 0]
     const expectedPosition = [0, 1]
 
@@ -71,7 +72,7 @@ describe('Mars Rovers', () => {
 
   test('moves forward to the north', () => {
     const commands = 'f'
-    const facing = DIRECTIONS.NORTH
+    const facing = NORTH
     const initialPosition = [0, 1]
     const expectedPosition = [0, 0]
 
@@ -87,7 +88,7 @@ describe('Mars Rovers', () => {
 
   test('moves forward to the east', () => {
     const commands = 'f'
-    const facing = DIRECTIONS.EAST
+    const facing = EAST
     const initialPosition = [0, 0]
     const expectedPosition = [1, 0]
 
@@ -103,7 +104,7 @@ describe('Mars Rovers', () => {
 
   test('moves forward to the west', () => {
     const commands = 'f'
-    const facing = DIRECTIONS.WEST
+    const facing = WEST
     const initialPosition = [1, 0]
     const expectedPosition = [0, 0]
 
@@ -119,7 +120,7 @@ describe('Mars Rovers', () => {
 
   test('moves backwards facing south', () => {
     const commands = 'b'
-    const facing = DIRECTIONS.SOUTH
+    const facing = SOUTH
     const initialPosition = [0, 1]
     const expectedPosition = [0, 0]
 
@@ -135,7 +136,7 @@ describe('Mars Rovers', () => {
 
   test('moves backwards facing north', () => {
     const commands = 'b'
-    const facing = DIRECTIONS.NORTH
+    const facing = NORTH
     const initialPosition = [0, 0]
     const expectedPosition = [0, 1]
 
@@ -151,7 +152,7 @@ describe('Mars Rovers', () => {
 
   test('moves backwards facing east', () => {
     const commands = 'b'
-    const facing = DIRECTIONS.EAST
+    const facing = EAST
     const initialPosition = [1, 0]
     const expectedPosition = [0, 0]
 
@@ -167,7 +168,7 @@ describe('Mars Rovers', () => {
 
   test('moves backwards facing west', () => {
     const commands = 'b'
-    const facing = DIRECTIONS.WEST
+    const facing = WEST
     const initialPosition = [0, 0]
     const expectedPosition = [1, 0]
 
