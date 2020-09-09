@@ -16,9 +16,16 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
     throw new Error('Initial position is not inside grid boundaries')
 
   return function roverCommander(commands) {
+    let facing = initialFacing
+    let [ x, y ] = initialPosition
+
+    if (commands === 'f' && facing === DIRECTIONS.SOUTH) {
+      y++
+    }
+
     return {
-      facing: initialFacing,
-      position: initialPosition,
+      facing: facing,
+      position: [ x, y ]
     }
   }
 }
