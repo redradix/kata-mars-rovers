@@ -68,4 +68,52 @@ describe('Mars Rovers', () => {
 
     expect(position).toEqual(expectedPosition)
   })
+
+  test('moves forward to the north', () => {
+    const commands = 'f'
+    const facing = DIRECTIONS.NORTH
+    const initialPosition = [0, 1]
+    const expectedPosition = [0, 0]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      facing,
+    )
+    const { position } = roverCommander(commands)
+
+    expect(position).toEqual(expectedPosition)
+  })
+
+  test('moves forward to the east', () => {
+    const commands = 'f'
+    const facing = DIRECTIONS.EAST
+    const initialPosition = [0, 0]
+    const expectedPosition = [1, 0]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      facing,
+    )
+    const { position } = roverCommander(commands)
+
+    expect(position).toEqual(expectedPosition)
+  })
+
+  test('moves forward to the west', () => {
+    const commands = 'f'
+    const facing = DIRECTIONS.WEST
+    const initialPosition = [1, 0]
+    const expectedPosition = [0, 0]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      facing,
+    )
+    const { position } = roverCommander(commands)
+
+    expect(position).toEqual(expectedPosition)
+  })
 })
