@@ -5,6 +5,12 @@ const DIRECTIONS = {
   WEST: 'W',
 }
 
+const fixToBoundaries = ({ length }, index) => {
+  if (index < 0) return length + index % length
+  if (index >= length) return index % length
+  return index
+}
+
 const isInGrid = ([ height, width ], [ row, column ]) => {
   if (row < 0 || row >= height) return false
   if (column < 0|| column >= width) return false
@@ -37,31 +43,19 @@ const moveBackward = (facing, [ x, y ]) => {
   }
 }
 
-const turnLeft = (facing) => {
-  switch (facing) {
-    case DIRECTIONS.NORTH:
-      return DIRECTIONS.WEST
-    case DIRECTIONS.WEST:
-      return DIRECTIONS.SOUTH
-    case DIRECTIONS.SOUTH:
-      return DIRECTIONS.EAST
-    case DIRECTIONS.EAST:
-      return DIRECTIONS.NORTH
-  }
+const turnClockwise = (steps, facing) => {
+  const CLOCKWISE = [
+    DIRECTIONS.NORTH,
+    DIRECTIONS.EAST,
+    DIRECTIONS.SOUTH,
+    DIRECTIONS.WEST,
+  ]
+  const newIndex = steps + CLOCKWISE.indexOf(facing)
+  return CLOCKWISE[fixToBoundaries(CLOCKWISE, newIndex)]
 }
+const turnLeft = turnClockwise.bind(undefined, -1)
+const turnRight = turnClockwise.bind(undefined, 1)
 
-const turnRight = (facing) => {
-  switch (facing) {
-    case DIRECTIONS.NORTH:
-      return DIRECTIONS.EAST
-    case DIRECTIONS.EAST:
-      return DIRECTIONS.SOUTH
-    case DIRECTIONS.SOUTH:
-      return DIRECTIONS.WEST
-    case DIRECTIONS.WEST:
-      return DIRECTIONS.NORTH
-  }
-}
 
 function createRoverCommander (gridSize, initialPosition, initialFacing) {
   if (!isInGrid(gridSize, initialPosition))
