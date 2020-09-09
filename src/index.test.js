@@ -38,7 +38,7 @@ describe('Mars Rovers', () => {
     roverCommanders.forEach((roverCommander, i) => {
       const { position } = roverCommander('')
 
-      expect(position).toBe(expectedPosition[i])
+      expect(position).toEqual(expectedPosition[i])
     })
   })
 
@@ -66,6 +66,6 @@ describe('Mars Rovers', () => {
     )
     const { position } = roverCommander(commands)
 
-    expect(position).toBe(expectedPosition)
+    expect(position).toEqual(expectedPosition)
   })
 })
