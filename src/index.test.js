@@ -2,11 +2,15 @@ const { createRoverCommander } = require('./index')
 
 describe('Mars Rovers', () => {
   test('faces the initial facing when no command is given', () => {
-    const expected = 'N'
-    const roverCommander = createRoverCommander('N')
+    const expected = [ 'N', 'E', 'S', 'W' ]
 
-    const result = roverCommander('').facing
+    const roverCommanders = expected
+      .map((direction) => createRoverCommander(direction))
 
-    expect(result).toBe(expected)
+    roverCommanders.forEach((roverCommander, i) => {
+      const { facing } = roverCommander('')
+
+      expect(facing).toBe(expected[i])
+    })
   })
 })
