@@ -200,5 +200,23 @@ describe('Mars Rovers', () => {
       expect(facing).toBe(expectedFacings[i])
     })
   })
-  
+
+  test('turns right for every initial facing', () => {
+    const commands = 'r'
+    const initialFacings =  [ NORTH, EAST , SOUTH, WEST  ]
+    const expectedFacings = [ EAST , SOUTH, WEST , NORTH ]
+
+    const roverCommanders = initialFacings
+      .map((facing) => createRoverCommander(
+        exampleGridSize,
+        exampleInitialPosition,
+        facing,
+      ))
+
+    roverCommanders.forEach((roverCommander, i) => {
+      const { facing } = roverCommander(commands)
+
+      expect(facing).toBe(expectedFacings[i])
+    })
+  })
 })
