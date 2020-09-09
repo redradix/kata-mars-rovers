@@ -19,8 +19,25 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
     let facing = initialFacing
     let [ x, y ] = initialPosition
 
-    if (commands === 'f' && facing === DIRECTIONS.SOUTH) {
-      y++
+    const moveForward = () => {
+      switch(facing) {
+        case DIRECTIONS.SOUTH:
+          y++
+          break
+        case DIRECTIONS.NORTH:
+          y--
+          break
+        case DIRECTIONS.EAST:
+          x++
+          break
+        case DIRECTIONS.WEST:
+          x--
+          break
+      }
+    }
+
+    if (commands === 'f') {
+      moveForward()
     }
 
     return {
