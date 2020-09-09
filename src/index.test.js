@@ -1,6 +1,7 @@
 const { createRoverCommander } = require('./index')
 
 describe('Mars Rovers', () => {
+  const exampleGridSize = [10, 10]
   const exampleInitialPosition = [0, 0]
   const exampleFacing = 'S'
 
@@ -9,6 +10,7 @@ describe('Mars Rovers', () => {
 
     const roverCommanders = expectedFacing
       .map((direction) => createRoverCommander(
+        exampleGridSize,
         exampleInitialPosition,
         direction,
       ))
@@ -28,6 +30,7 @@ describe('Mars Rovers', () => {
 
     const roverCommanders = expectedPosition
       .map((position) => createRoverCommander(
+        exampleGridSize,
         position,
         exampleFacing,
       ))
@@ -37,5 +40,16 @@ describe('Mars Rovers', () => {
 
       expect(position).toBe(expectedPosition[i])
     })
+  })
+
+  test('throws an error when initial position is not in grid size', () => {
+    const gridSize = [5, 5]
+    const initialPosition = [10, 10]
+
+    expect(() => createRoverCommander(
+      gridSize,
+      initialPosition,
+      exampleFacing,
+    )).toThrow()
   })
 })
