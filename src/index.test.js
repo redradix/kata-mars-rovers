@@ -1,12 +1,12 @@
-const { createRoverCommander } = require('./index')
+const { createRoverCommander, DIRECTIONS } = require('./index')
 
 describe('Mars Rovers', () => {
   const exampleGridSize = [10, 10]
   const exampleInitialPosition = [0, 0]
-  const exampleFacing = 'S'
+  const exampleFacing = DIRECTIONS.SOUTH
 
   test('faces the initial facing when no command is given', () => {
-    const expectedFacing = [ 'N', 'E', 'S', 'W' ]
+    const expectedFacing = Object.values(DIRECTIONS)
 
     const roverCommanders = expectedFacing
       .map((direction) => createRoverCommander(

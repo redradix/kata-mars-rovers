@@ -1,3 +1,10 @@
+const DIRECTIONS = {
+  NORTH: 'N',
+  EAST: 'E',
+  SOUTH: 'S',
+  WEST: 'W',
+}
+
 const isInGrid = ([ height, width ], [ row, column ]) => {
   if (row < 0 || row >= height) return false
   if (column < 0|| column >= width) return false
@@ -18,4 +25,5 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
 
 module.exports = {
   createRoverCommander,
+  DIRECTIONS,
 }
