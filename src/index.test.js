@@ -63,132 +63,46 @@ describe('Mars Rovers', () => {
     })
   })
 
-  test('moves forward to the south', () => {
-    const commands = [ FORWARD ]
-    const facing = SOUTH
-    const initialPosition = [0, 0]
-    const expectedPosition = [0, 1]
+  Array.of(
+    { facing: NORTH, expectedPosition: [2,1], text: 'North' },
+    { facing: EAST , expectedPosition: [3,2], text: 'East' },
+    { facing: SOUTH, expectedPosition: [2,3], text: 'South' },
+    { facing: WEST , expectedPosition: [1,2], text: 'West' },
+  ).forEach(({ facing, expectedPosition, text }) => {
+    test(`moves forward to the ${ text }`, () => {
+      const commands = [ FORWARD ]
+      const initialPosition = [2, 2]
+      const roverCommander = createRoverCommander(
+        [5, 5],
+        initialPosition,
+        facing,
+      )
 
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
+      const { position } = roverCommander(commands)
 
-    expect(position).toEqual(expectedPosition)
+      expect(position).toEqual(expectedPosition)
+    })
   })
 
-  test('moves forward to the north', () => {
-    const commands = [ FORWARD ]
-    const facing = NORTH
-    const initialPosition = [0, 1]
-    const expectedPosition = [0, 0]
+  Array.of(
+    { facing: NORTH, expectedPosition: [2,3], text: 'North' },
+    { facing: EAST , expectedPosition: [1,2], text: 'East' },
+    { facing: SOUTH, expectedPosition: [2,1], text: 'South' },
+    { facing: WEST , expectedPosition: [3,2], text: 'West' },
+  ).forEach(({ facing, expectedPosition, text }) => {
+    test(`moves backwards facing ${ text }`, () => {
+      const commands = [ BACKWARD ]
+      const initialPosition = [2, 2]
+      const roverCommander = createRoverCommander(
+        [5, 5],
+        initialPosition,
+        facing,
+      )
 
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
+      const { position } = roverCommander(commands)
 
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves forward to the east', () => {
-    const commands = [ FORWARD ]
-    const facing = EAST
-    const initialPosition = [0, 0]
-    const expectedPosition = [1, 0]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves forward to the west', () => {
-    const commands = [ FORWARD ]
-    const facing = WEST
-    const initialPosition = [1, 0]
-    const expectedPosition = [0, 0]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves backwards facing south', () => {
-    const commands = [ BACKWARD ]
-    const facing = SOUTH
-    const initialPosition = [0, 1]
-    const expectedPosition = [0, 0]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves backwards facing north', () => {
-    const commands = [ BACKWARD ]
-    const facing = NORTH
-    const initialPosition = [0, 0]
-    const expectedPosition = [0, 1]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves backwards facing east', () => {
-    const commands = [ BACKWARD ]
-    const facing = EAST
-    const initialPosition = [1, 0]
-    const expectedPosition = [0, 0]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
-  })
-
-  test('moves backwards facing west', () => {
-    const commands = [ BACKWARD ]
-    const facing = WEST
-    const initialPosition = [0, 0]
-    const expectedPosition = [1, 0]
-
-    const roverCommander = createRoverCommander(
-      exampleGridSize,
-      initialPosition,
-      facing,
-    )
-    const { position } = roverCommander(commands)
-
-    expect(position).toEqual(expectedPosition)
+      expect(position).toEqual(expectedPosition)
+    })
   })
 
   Array.of(
