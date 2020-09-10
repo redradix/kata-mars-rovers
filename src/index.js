@@ -17,31 +17,20 @@ const isInGrid = ([ height, width ], [ row, column ]) => {
   return true
 }
 
-const moveForward = (facing, [ x, y ]) => {
+const move = (steps, facing, [ x, y ]) => {
   switch(facing) {
     case DIRECTIONS.SOUTH:
-      return [ x, y + 1 ]
+      return [ x, y + steps ]
     case DIRECTIONS.NORTH:
-      return [ x, y - 1 ]
+      return [ x, y - steps ]
     case DIRECTIONS.EAST:
-      return [ x + 1, y ]
+      return [ x + steps, y ]
     case DIRECTIONS.WEST:
-      return [ x - 1, y ]
+      return [ x - steps, y ]
   }
 }
-
-const moveBackward = (facing, [ x, y ]) => {
-  switch(facing) {
-    case DIRECTIONS.SOUTH:
-      return [ x, y - 1 ]
-    case DIRECTIONS.NORTH:
-      return [ x, y + 1 ]
-    case DIRECTIONS.EAST:
-      return [ x - 1, y ]
-    case DIRECTIONS.WEST:
-      return [ x + 1, y ]
-  }
-}
+const moveForward = move.bind(undefined, 1)
+const moveBackward = move.bind(undefined, -1)
 
 const turnClockwise = (steps, facing) => {
   const CLOCKWISE = [
