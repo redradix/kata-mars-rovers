@@ -3,9 +3,6 @@ const { NORTH, EAST, SOUTH, WEST } = DIRECTIONS
 const { LEFT, RIGHT, FORWARD, BACKWARD } = COMMANDS
 
 describe('Mars Rovers', () => {
-  const exampleGridSize = [10, 10]
-  const exampleInitialPosition = [0, 0]
-  const exampleFacing = SOUTH
   const NO_COMMAND = []
 
   Array.of(
@@ -153,7 +150,7 @@ describe('Mars Rovers', () => {
     const expectedPosition = [0, 1]
 
     const executeCommands = createRoverCommander(
-      exampleGridSize,
+      [2, 2],
       initialPosition,
       initialFacing,
     )
@@ -179,7 +176,7 @@ describe('Mars Rovers', () => {
     const expectedPosition = [2, 0]
 
     const executeCommands = createRoverCommander(
-      exampleGridSize,
+      [3, 3],
       initialPosition,
       initialFacing,
     )
