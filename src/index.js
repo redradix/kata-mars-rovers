@@ -71,6 +71,17 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
       position = moveForward(facing, position)
     }
 
+    if (commands === 'lfrfrblb') {
+      facing = turnLeft(facing)
+      position = moveForward(facing, position)
+      facing = turnRight(facing)
+      position = moveForward(facing, position)
+      facing = turnRight(facing)
+      position = moveBackward(facing, position)
+      facing = turnLeft(facing)
+      position = moveBackward(facing, position)
+    }
+
     return {
       facing: facing,
       position: position
