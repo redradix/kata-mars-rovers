@@ -8,40 +8,43 @@ describe('Mars Rovers', () => {
   const exampleFacing = SOUTH
   const NO_COMMAND = []
 
-  test('faces the initial facing when no command is given', () => {
-    const expectedFacing = Object.values(DIRECTIONS)
+  Array.of(
+    { initialFacing: NORTH, text: 'North' },
+    { initialFacing: EAST , text: 'East' },
+    { initialFacing: SOUTH, text: 'South' },
+    { initialFacing: WEST , text: 'West' },
+  ).forEach(({ initialFacing, text }) => {
+    test(`faces the initial ${ text } facing when no command is given`, () => {
+      const expectedFacing = initialFacing
+      const roverCommander = createRoverCommander(
+        [10, 10],
+        [0, 0],
+        initialFacing,
+      )
 
-    const roverCommanders = expectedFacing
-      .map((direction) => createRoverCommander(
-        exampleGridSize,
-        exampleInitialPosition,
-        direction,
-      ))
-
-    roverCommanders.forEach((roverCommander, i) => {
       const { facing } = roverCommander(NO_COMMAND)
 
-      expect(facing).toBe(expectedFacing[i])
+      expect(facing).toBe(expectedFacing)
     })
   })
 
-  test('stays in the initial position when no command is given', () => {
-    const expectedPosition = [
-      [0, 0],
-      [5, 5],
-    ]
+  Array.of(
+    { initialPosition: [0,0] },
+    { initialPosition: [3,7] },
+    { initialPosition: [9,9] },
+  ).forEach(({ initialPosition }) => {
+    test(`stays in the initial position (${ initialPosition}) when no command is given`, () => {
+      const expectedPosition = initialPosition
 
-    const roverCommanders = expectedPosition
-      .map((position) => createRoverCommander(
-        exampleGridSize,
-        position,
-        exampleFacing,
-      ))
+      const roverCommander = createRoverCommander(
+        [10, 10],
+        initialPosition,
+        SOUTH,
+      )
 
-    roverCommanders.forEach((roverCommander, i) => {
       const { position } = roverCommander(NO_COMMAND)
 
-      expect(position).toEqual(expectedPosition[i])
+      expect(position).toEqual(expectedPosition)
     })
   })
 
@@ -188,41 +191,43 @@ describe('Mars Rovers', () => {
     expect(position).toEqual(expectedPosition)
   })
 
-  test('turns left for every initial facing', () => {
-    const commands = [ LEFT ]
-    const initialFacings =  [ NORTH, WEST , SOUTH, EAST  ]
-    const expectedFacings = [ WEST , SOUTH, EAST , NORTH ]
+  Array.of(
+    { initialFacing: NORTH, expectedFacing: WEST , text: 'North' },
+    { initialFacing: WEST , expectedFacing: SOUTH, text: 'West' },
+    { initialFacing: SOUTH, expectedFacing: EAST , text: 'South' },
+    { initialFacing: EAST , expectedFacing: NORTH, text: 'West' },
+  ).forEach(({ initialFacing, expectedFacing, text }) => {
+    test(`turns left when facing ${ text }`, () => {
+      const commands = [ LEFT ]
+      const roverCommander = createRoverCommander(
+        [1, 1],
+        [0, 0],
+        initialFacing,
+      )
 
-    const roverCommanders = initialFacings
-      .map((facing) => createRoverCommander(
-        exampleGridSize,
-        exampleInitialPosition,
-        facing,
-      ))
-
-    roverCommanders.forEach((roverCommander, i) => {
       const { facing } = roverCommander(commands)
 
-      expect(facing).toBe(expectedFacings[i])
+      expect(facing).toBe(expectedFacing)
     })
   })
 
-  test('turns right for every initial facing', () => {
-    const commands = [ RIGHT ]
-    const initialFacings =  [ NORTH, EAST , SOUTH, WEST  ]
-    const expectedFacings = [ EAST , SOUTH, WEST , NORTH ]
+  Array.of(
+    { initialFacing: NORTH, expectedFacing: EAST , text: 'North' },
+    { initialFacing: WEST , expectedFacing: NORTH, text: 'West' },
+    { initialFacing: SOUTH, expectedFacing: WEST , text: 'South' },
+    { initialFacing: EAST , expectedFacing: SOUTH, text: 'West' },
+  ).forEach(({ initialFacing, expectedFacing, text }) => {
+    test(`turns right when facing ${ text }`, () => {
+      const commands = [ RIGHT ]
+      const roverCommander = createRoverCommander(
+        [1, 1],
+        [0, 0],
+        initialFacing,
+      )
 
-    const roverCommanders = initialFacings
-      .map((facing) => createRoverCommander(
-        exampleGridSize,
-        exampleInitialPosition,
-        facing,
-      ))
-
-    roverCommanders.forEach((roverCommander, i) => {
       const { facing } = roverCommander(commands)
 
-      expect(facing).toBe(expectedFacings[i])
+      expect(facing).toBe(expectedFacing)
     })
   })
 
