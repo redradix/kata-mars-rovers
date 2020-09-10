@@ -17,22 +17,22 @@ const isInGrid = ([ height, width ], [ row, column ]) => {
   return true
 }
 
-const move = (steps, facing, [ x, y ]) => {
+const move = (steps, { facing, position: [ x, y ] }) => {
   switch(facing) {
     case DIRECTIONS.SOUTH:
-      return [ x, y + steps ]
+      return { facing, position: [ x, y + steps ] }
     case DIRECTIONS.NORTH:
-      return [ x, y - steps ]
+      return { facing, position: [ x, y - steps ] }
     case DIRECTIONS.EAST:
-      return [ x + steps, y ]
+      return { facing, position: [ x + steps, y ] }
     case DIRECTIONS.WEST:
-      return [ x - steps, y ]
+      return { facing, position: [ x - steps, y ] }
   }
 }
 const moveForward = move.bind(undefined, 1)
 const moveBackward = move.bind(undefined, -1)
 
-const turnClockwise = (steps, facing) => {
+const turnClockwise = (steps, { facing, position }) => {
   const CLOCKWISE = [
     DIRECTIONS.NORTH,
     DIRECTIONS.EAST,
@@ -40,52 +40,40 @@ const turnClockwise = (steps, facing) => {
     DIRECTIONS.WEST,
   ]
   const newIndex = steps + CLOCKWISE.indexOf(facing)
-  return CLOCKWISE[fixToBoundaries(CLOCKWISE, newIndex)]
+  return {
+    facing: CLOCKWISE[fixToBoundaries(CLOCKWISE, newIndex)],
+    position,
+  }
 }
 const turnLeft = turnClockwise.bind(undefined, -1)
 const turnRight = turnClockwise.bind(undefined, 1)
 
+const COMMANDS = {
+  'r': turnRight,
+  'l': turnLeft,
+  'f': moveForward,
+  'b': moveBackward,
+}
+
+const executeCommands = (rover, [ firstCommand, ...restCommands ]) => {
+  if (firstCommand === undefined) return rover
+  return executeCommands(
+    COMMANDS[firstCommand](rover),
+    restCommands
+  )
+}
 
 function createRoverCommander (gridSize, initialPosition, initialFacing) {
   if (!isInGrid(gridSize, initialPosition))
     throw new Error('Initial position is not inside grid boundaries')
 
   return function roverCommander(commands) {
-    let facing = initialFacing
-    let position = initialPosition
-
-    if (commands === 'f') {
-      position = moveForward(facing, position)
-    } else if (commands === 'b') {
-      position = moveBackward(facing, position)
+    const initialRover = {
+      facing: initialFacing,
+      position: initialPosition,
     }
 
-    if (commands === 'l') {
-      facing = turnLeft(facing)
-    } else if (commands === 'r') {
-      facing = turnRight(facing)
-    }
-
-    if (commands === 'rf') {
-      facing = turnRight(facing)
-      position = moveForward(facing, position)
-    }
-
-    if (commands === 'lfrfrblb') {
-      facing = turnLeft(facing)
-      position = moveForward(facing, position)
-      facing = turnRight(facing)
-      position = moveForward(facing, position)
-      facing = turnRight(facing)
-      position = moveBackward(facing, position)
-      facing = turnLeft(facing)
-      position = moveBackward(facing, position)
-    }
-
-    return {
-      facing: facing,
-      position: position
-    }
+    return executeCommands(initialRover, commands)
   }
 }
 
