@@ -241,7 +241,7 @@ describe('Mars Rovers', () => {
     })
   })
 
-  test('takes a small walk, turning left and rigth and moving forwards and backwards', () => {
+  test('takes a small walk, turning left and right and moving forwards and backwards', () => {
     const commands = 'lfrfrblb'
     const initialFacing = SOUTH
     const initialPosition = [0, 0]
