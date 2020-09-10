@@ -19,8 +19,10 @@ const fixToBoundaries = ({ length }, index) => {
 }
 
 const isInGrid = ([ height, width ], [ row, column ]) => {
-  if (row < 0 || row >= height) return false
-  if (column < 0|| column >= width) return false
+  if (row < 0) return false
+  if (row >= height) return false
+  if (column < 0) return false
+  if (column >= width) return false
   return true
 }
 
