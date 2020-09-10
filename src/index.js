@@ -5,6 +5,13 @@ const DIRECTIONS = {
   WEST: 'W',
 }
 
+const COMMANDS = {
+  LEFT: 'l',
+  RIGHT: 'r',
+  FORWARD: 'f',
+  BACKWARD: 'b',
+}
+
 const fixToBoundaries = ({ length }, index) => {
   if (index < 0) return length + index % length
   if (index >= length) return index % length
@@ -48,17 +55,17 @@ const turnClockwise = (steps, { facing, position }) => {
 const turnLeft = turnClockwise.bind(undefined, -1)
 const turnRight = turnClockwise.bind(undefined, 1)
 
-const COMMANDS = {
-  'r': turnRight,
-  'l': turnLeft,
-  'f': moveForward,
-  'b': moveBackward,
+const COMMAND_FUNCTIONS = {
+  [COMMANDS.LEFT]: turnLeft,
+  [COMMANDS.RIGHT]: turnRight,
+  [COMMANDS.FORWARD]: moveForward,
+  [COMMANDS.BACKWARD]: moveBackward,
 }
 
 const executeCommands = (rover, [ firstCommand, ...restCommands ]) => {
   if (firstCommand === undefined) return rover
   return executeCommands(
-    COMMANDS[firstCommand](rover),
+    COMMAND_FUNCTIONS[firstCommand](rover),
     restCommands
   )
 }
