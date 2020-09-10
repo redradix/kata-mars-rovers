@@ -36,8 +36,6 @@ const move = (steps) => ({ facing, position: [ x, y ] }) => {
       return { facing, position: [ x - steps, y ] }
   }
 }
-const moveForward = move(1)
-const moveBackward = move(-1)
 
 const turnClockwise = (steps) => ({ facing, position }) => {
   const CLOCKWISE = [
@@ -52,14 +50,12 @@ const turnClockwise = (steps) => ({ facing, position }) => {
     position,
   }
 }
-const turnLeft = turnClockwise(-1)
-const turnRight = turnClockwise(1)
 
 const COMMAND_FUNCTIONS = {
-  [COMMANDS.LEFT]: turnLeft,
-  [COMMANDS.RIGHT]: turnRight,
-  [COMMANDS.FORWARD]: moveForward,
-  [COMMANDS.BACKWARD]: moveBackward,
+  [COMMANDS.LEFT]: turnClockwise(-1),
+  [COMMANDS.RIGHT]: turnClockwise(1),
+  [COMMANDS.FORWARD]: move(1),
+  [COMMANDS.BACKWARD]: move(-1),
 }
 
 const executeCommands = (rover) => ([ firstCommand, ...restCommands ]) => {
