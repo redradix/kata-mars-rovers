@@ -45,15 +45,19 @@ describe('Mars Rovers', () => {
     })
   })
 
-  test('throws an error when initial position is not in grid size', () => {
-    const gridSize = [5, 5]
-    const initialPosition = [10, 10]
-
-    expect(() => createRoverCommander(
-      gridSize,
-      initialPosition,
-      exampleFacing,
-    )).toThrow()
+  Array.of(
+    { initialPosition: [-10,  0], text: 'has a negative row' },
+    { initialPosition: [  0,-10], text: 'has a negative column' },
+    { initialPosition: [ 10,  0], text: 'is greater than grid height' },
+    { initialPosition: [  0, 10], text: 'is greater than grid width' },
+  ).forEach(({ initialPosition, text }) => {
+    test(`throws an error when initial position ${ text }`, () => {
+      expect(() => createRoverCommander(
+        [5, 5],
+        initialPosition,
+        SOUTH,
+      )).toThrow()
+    })
   })
 
   test('moves forward to the south', () => {
