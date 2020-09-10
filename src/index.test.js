@@ -219,4 +219,25 @@ describe('Mars Rovers', () => {
       expect(facing).toBe(expectedFacings[i])
     })
   })
+
+  test('turns right and then moves forward', () => {
+    const commands = 'rf'
+    const initialFacing =  EAST
+    const expectedFacing = SOUTH
+    const initialPosition = [0, 0]
+    const expectedPosition = [0, 1]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      initialFacing,
+    )
+
+    const result = roverCommander(commands)
+
+    expect(result).toEqual({
+      facing: expectedFacing,
+      position: expectedPosition,
+    })
+  })
 })
