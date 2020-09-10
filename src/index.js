@@ -26,16 +26,19 @@ const isInGrid = ([ height, width ], [ row, column ]) => {
   return true
 }
 
-const move = (steps) => ({ facing, position: [ x, y ] }) => {
-  switch(facing) {
-    case DIRECTIONS.SOUTH:
-      return { facing, position: [ x, y + steps ] }
-    case DIRECTIONS.NORTH:
-      return { facing, position: [ x, y - steps ] }
-    case DIRECTIONS.EAST:
-      return { facing, position: [ x + steps, y ] }
-    case DIRECTIONS.WEST:
-      return { facing, position: [ x - steps, y ] }
+const MOVING_FUNCTIONS = {
+  [DIRECTIONS.SOUTH]: (steps, [ x, y ]) => [ x, y + steps ],
+  [DIRECTIONS.NORTH]: (steps, [ x, y ]) => [ x, y - steps ],
+  [DIRECTIONS.EAST]: (steps, [ x, y ]) => [ x + steps, y ],
+  [DIRECTIONS.WEST]: (steps, [ x, y ]) => [ x - steps, y ],
+}
+
+const move = (steps) => (rover) => {
+  const { facing, position } = rover
+  const getNewPosition = MOVING_FUNCTIONS[facing](steps, position)
+  return {
+    ...rover,
+    position: getNewPosition,
   }
 }
 
