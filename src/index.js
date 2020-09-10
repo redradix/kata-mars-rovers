@@ -66,6 +66,11 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
       facing = turnRight(facing)
     }
 
+    if (commands === 'rf') {
+      facing = turnRight(facing)
+      position = moveForward(facing, position)
+    }
+
     return {
       facing: facing,
       position: position
