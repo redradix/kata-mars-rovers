@@ -74,14 +74,10 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
   if (!isInGrid(gridSize, initialPosition))
     throw new Error('Initial position is not inside grid boundaries')
 
-  return function roverCommander(commands) {
-    const initialRover = {
-      facing: initialFacing,
-      position: initialPosition,
-    }
-
-    return executeCommands(initialRover, commands)
-  }
+  return executeCommands.bind(undefined, {
+    facing: initialFacing,
+    position: initialPosition,
+  })
 }
 
 module.exports = {
