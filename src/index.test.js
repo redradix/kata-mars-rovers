@@ -16,13 +16,13 @@ describe('Mars Rovers', () => {
   ).forEach(({ initialFacing, text }) => {
     test(`faces the initial ${ text } facing when no command is given`, () => {
       const expectedFacing = initialFacing
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [10, 10],
         [0, 0],
         initialFacing,
       )
 
-      const { facing } = roverCommander(NO_COMMAND)
+      const { facing } = executeCommands(NO_COMMAND)
 
       expect(facing).toBe(expectedFacing)
     })
@@ -36,13 +36,13 @@ describe('Mars Rovers', () => {
     test(`stays in the initial position (${ initialPosition}) when no command is given`, () => {
       const expectedPosition = initialPosition
 
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [10, 10],
         initialPosition,
         SOUTH,
       )
 
-      const { position } = roverCommander(NO_COMMAND)
+      const { position } = executeCommands(NO_COMMAND)
 
       expect(position).toEqual(expectedPosition)
     })
@@ -72,13 +72,13 @@ describe('Mars Rovers', () => {
     test(`moves forward to the ${ text }`, () => {
       const commands = [ FORWARD ]
       const initialPosition = [2, 2]
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [5, 5],
         initialPosition,
         facing,
       )
 
-      const { position } = roverCommander(commands)
+      const { position } = executeCommands(commands)
 
       expect(position).toEqual(expectedPosition)
     })
@@ -93,13 +93,13 @@ describe('Mars Rovers', () => {
     test(`moves backwards facing ${ text }`, () => {
       const commands = [ BACKWARD ]
       const initialPosition = [2, 2]
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [5, 5],
         initialPosition,
         facing,
       )
 
-      const { position } = roverCommander(commands)
+      const { position } = executeCommands(commands)
 
       expect(position).toEqual(expectedPosition)
     })
@@ -113,13 +113,13 @@ describe('Mars Rovers', () => {
   ).forEach(({ initialFacing, expectedFacing, text }) => {
     test(`turns left when facing ${ text }`, () => {
       const commands = [ LEFT ]
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [1, 1],
         [0, 0],
         initialFacing,
       )
 
-      const { facing } = roverCommander(commands)
+      const { facing } = executeCommands(commands)
 
       expect(facing).toBe(expectedFacing)
     })
@@ -133,13 +133,13 @@ describe('Mars Rovers', () => {
   ).forEach(({ initialFacing, expectedFacing, text }) => {
     test(`turns right when facing ${ text }`, () => {
       const commands = [ RIGHT ]
-      const roverCommander = createRoverCommander(
+      const executeCommands = createRoverCommander(
         [1, 1],
         [0, 0],
         initialFacing,
       )
 
-      const { facing } = roverCommander(commands)
+      const { facing } = executeCommands(commands)
 
       expect(facing).toBe(expectedFacing)
     })
@@ -152,13 +152,13 @@ describe('Mars Rovers', () => {
     const initialPosition = [0, 0]
     const expectedPosition = [0, 1]
 
-    const roverCommander = createRoverCommander(
+    const executeCommands = createRoverCommander(
       exampleGridSize,
       initialPosition,
       initialFacing,
     )
 
-    const result = roverCommander(commands)
+    const result = executeCommands(commands)
 
     expect(result).toEqual({
       facing: expectedFacing,
@@ -178,13 +178,13 @@ describe('Mars Rovers', () => {
     const expectedFacing = SOUTH
     const expectedPosition = [2, 0]
 
-    const roverCommander = createRoverCommander(
+    const executeCommands = createRoverCommander(
       exampleGridSize,
       initialPosition,
       initialFacing,
     )
 
-    const result = roverCommander(commands)
+    const result = executeCommands(commands)
 
     expect(result).toEqual({
       facing: expectedFacing,
