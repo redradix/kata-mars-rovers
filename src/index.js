@@ -11,28 +11,31 @@ const createGrid = (sizes) => {
 }
 
 const setLocation = (startingPoint, initialDirection, grid) => {
-  try {
-    grid[startingPoint[0]][startingPoint[1]] = initialDirection
-  } catch {
-    grid[startingPoint[0] - 1][startingPoint[1]] = initialDirection
-  }
+  const newGrid = [...grid]
+  newGrid[startingPoint[0]][startingPoint[1]] = initialDirection
+  return newGrid
 }
 
 const changeDirection = (direction, command) => {
   const directions = ['N', 'E', 'S', 'W']
   const indexOfDirection = directions.indexOf(direction)
-  if (command === 'l') {
-    return indexOfDirection !== 0 ? directions[indexOfDirection - 1] : directions[3]
-  } else if (command === 'r') {
-    return indexOfDirection !== 3 ? directions[indexOfDirection + 1] : directions[0]
-  }
+  return {
+    l: indexOfDirection !== 0 ? directions[indexOfDirection - 1] : directions[3],
+    r: indexOfDirection !== 3 ? directions[indexOfDirection + 1] : directions[0]
+  }[command]
 }
 
-const checkForValidLocation = (previousLocation, newLocation) => {
-  return newLocation[0] < 0 || newLocation[1] < 0 ? previousLocation : newLocation
+const checkForValidLocation = (previousLocation, newLocation, gridSize) => {
+
+  const extendsLeftLimit = newLocation[1] < 0
+  const extendsRightLimit = newLocation[1] >= gridSize[1]
+  const extendsUpperLimit = newLocation[0] < 0
+  const extendsLowerLimit = newLocation[0] >= gridSize[0]
+
+  return extendsLeftLimit || extendsRightLimit || extendsUpperLimit || extendsLowerLimit ? previousLocation : newLocation
 }
 
-const moveRover = (previousLocation, direction, command) => {
+const changeLocation = (previousLocation, direction, gridSize, command) => {
 
   let newLocation
 
@@ -43,22 +46,22 @@ const moveRover = (previousLocation, direction, command) => {
     [previousLocation[0], previousLocation[1] - 1]
   ]
 
-  if (command === 'f') {
-    newLocation = {
+  newLocation = {
+    f: {
       N: referenceLocations[0],
       E: referenceLocations[1],
       S: referenceLocations[2],
       W: referenceLocations[3]
-    }[direction]
-  } else if (command === 'b') {
-    newLocation = {
+    }[direction],
+    b: {
       N: referenceLocations[2],
       E: referenceLocations[3],
       S: referenceLocations[0],
       W: referenceLocations[1]
     }[direction]
-  }
-  return checkForValidLocation(previousLocation, newLocation)
+  }[command]
+
+  return checkForValidLocation(previousLocation, newLocation, gridSize)
 }
 
 const rover = (startingPoint, initialDirection, gridSize, commands) => {
@@ -69,15 +72,15 @@ const rover = (startingPoint, initialDirection, gridSize, commands) => {
     if (command === 'l' || command === 'r') {
       direction = changeDirection(direction, command)
     } else if (command === 'f' || command === 'b') {
-      location = moveRover(location, direction, command)
+      location = changeLocation(location, direction, gridSize, command)
     }
   })
 
   const finalGrid = createGrid(gridSize)
-  setLocation(location, direction, finalGrid)
-  return finalGrid
+  const finalGridWithLocation = setLocation(location, direction, finalGrid)
+  return finalGridWithLocation
 }
 
 module.exports = rover
 
-console.log(rover([1, 0], 'S', [2, 2], ['f']))
+// console.log(rover([1, 1], 'E', [2, 2], ['f']))
