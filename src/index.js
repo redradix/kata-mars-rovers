@@ -87,4 +87,5 @@ function createRoverCommander (gridSize, initialPosition, initialFacing) {
 module.exports = {
   createRoverCommander,
   DIRECTIONS,
+  COMMANDS,
 }
