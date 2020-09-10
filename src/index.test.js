@@ -240,4 +240,25 @@ describe('Mars Rovers', () => {
       position: expectedPosition,
     })
   })
+
+  test('takes a small walk, turning left and rigth and moving forwards and backwards', () => {
+    const commands = 'lfrfrblb'
+    const initialFacing = SOUTH
+    const initialPosition = [0, 0]
+    const expectedFacing = SOUTH
+    const expectedPosition = [2, 0]
+
+    const roverCommander = createRoverCommander(
+      exampleGridSize,
+      initialPosition,
+      initialFacing,
+    )
+
+    const result = roverCommander(commands)
+
+    expect(result).toEqual({
+      facing: expectedFacing,
+      position: expectedPosition,
+    })
+  })
 })
