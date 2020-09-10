@@ -10,7 +10,13 @@ const createGrid = (sizes) => {
   return grid
 }
 
-const setLocation = (startingPoint, initialDirection, grid) => grid[startingPoint[0]][startingPoint[1]] = initialDirection
+const setLocation = (startingPoint, initialDirection, grid) => {
+  try {
+    grid[startingPoint[0]][startingPoint[1]] = initialDirection
+  } catch {
+    grid[startingPoint[0] - 1][startingPoint[1]] = initialDirection
+  }
+}
 
 const changeDirection = (direction, command) => {
   const directions = ['N', 'E', 'S', 'W']
@@ -55,7 +61,7 @@ const moveRover = (previousLocation, direction, command) => {
   return checkForValidLocation(previousLocation, newLocation)
 }
 
-const getFinalGrid = (startingPoint, initialDirection, gridSize, commands) => {
+const rover = (startingPoint, initialDirection, gridSize, commands) => {
   let direction = initialDirection
   let location = startingPoint
 
@@ -72,11 +78,6 @@ const getFinalGrid = (startingPoint, initialDirection, gridSize, commands) => {
   return finalGrid
 }
 
-const rover = (startingPoint, initialDirection, gridSize, commands) => {
-  const grid = createGrid(gridSize)
-  setLocation(startingPoint, initialDirection, grid)
-
-  return getFinalGrid(startingPoint, initialDirection, gridSize, commands)
-}
-
 module.exports = rover
+
+console.log(rover([1, 0], 'S', [2, 2], ['f']))
