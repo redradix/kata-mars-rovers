@@ -24,7 +24,7 @@ const isInGrid = ([ height, width ], [ row, column ]) => {
   return true
 }
 
-const move = (steps, { facing, position: [ x, y ] }) => {
+const move = (steps) => ({ facing, position: [ x, y ] }) => {
   switch(facing) {
     case DIRECTIONS.SOUTH:
       return { facing, position: [ x, y + steps ] }
@@ -36,10 +36,10 @@ const move = (steps, { facing, position: [ x, y ] }) => {
       return { facing, position: [ x - steps, y ] }
   }
 }
-const moveForward = move.bind(undefined, 1)
-const moveBackward = move.bind(undefined, -1)
+const moveForward = move(1)
+const moveBackward = move(-1)
 
-const turnClockwise = (steps, { facing, position }) => {
+const turnClockwise = (steps) => ({ facing, position }) => {
   const CLOCKWISE = [
     DIRECTIONS.NORTH,
     DIRECTIONS.EAST,
@@ -52,8 +52,8 @@ const turnClockwise = (steps, { facing, position }) => {
     position,
   }
 }
-const turnLeft = turnClockwise.bind(undefined, -1)
-const turnRight = turnClockwise.bind(undefined, 1)
+const turnLeft = turnClockwise(-1)
+const turnRight = turnClockwise(1)
 
 const COMMAND_FUNCTIONS = {
   [COMMANDS.LEFT]: turnLeft,
@@ -62,19 +62,17 @@ const COMMAND_FUNCTIONS = {
   [COMMANDS.BACKWARD]: moveBackward,
 }
 
-const executeCommands = (rover, [ firstCommand, ...restCommands ]) => {
+const executeCommands = (rover) => ([ firstCommand, ...restCommands ]) => {
   if (firstCommand === undefined) return rover
-  return executeCommands(
-    COMMAND_FUNCTIONS[firstCommand](rover),
-    restCommands
-  )
+  const executeCommand = COMMAND_FUNCTIONS[firstCommand]
+  return executeCommands(executeCommand(rover))(restCommands)
 }
 
 function createRoverCommander (gridSize, initialPosition, initialFacing) {
   if (!isInGrid(gridSize, initialPosition))
     throw new Error('Initial position is not inside grid boundaries')
 
-  return executeCommands.bind(undefined, {
+  return executeCommands({
     facing: initialFacing,
     position: initialPosition,
   })
