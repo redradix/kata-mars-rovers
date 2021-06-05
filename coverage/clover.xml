@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1622884802087" clover="3.2.0">
+  <project timestamp="1622884802087" name="All files">
+    <metrics statements="23" coveredstatements="23" conditionals="37" coveredconditionals="35" methods="7" coveredmethods="7" elements="67" coveredelements="65" complexity="0" loc="23" ncloc="23" packages="1" files="1" classes="1"/>
+    <file name="index.js" path="/Users/brave/Documents/Katas/kata-mars-rovers/src/index.js">
+      <metrics statements="23" coveredstatements="23" conditionals="37" coveredconditionals="35" methods="7" coveredmethods="7"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="12" type="stmt"/>
+      <line num="3" count="56" type="cond" truecount="4" falsecount="0"/>
+      <line num="4" count="56" type="cond" truecount="4" falsecount="0"/>
+      <line num="6" count="12" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="10" count="10" type="stmt"/>
+      <line num="11" count="10" type="stmt"/>
+      <line num="12" count="10" type="cond" truecount="2" falsecount="0"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="16" count="45" type="cond" truecount="4" falsecount="0"/>
+      <line num="17" count="33" type="cond" truecount="4" falsecount="0"/>
+      <line num="18" count="27" type="cond" truecount="4" falsecount="0"/>
+      <line num="19" count="10" type="cond" truecount="3" falsecount="1"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="23" count="45" type="stmt"/>
+      <line num="24" count="45" type="cond" truecount="2" falsecount="0"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="30" count="45" type="cond" truecount="5" falsecount="0"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="36" count="13" type="cond" truecount="2" falsecount="0"/>
+      <line num="37" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="40" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
