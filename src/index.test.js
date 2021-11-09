@@ -18,9 +18,14 @@ describe('Mars Rovers', () => {
     expect(rover.direction).toEqual('S')
   })
 
-  it('move forward to the east', () => {
+  it('move forward looking to the east', () => {
     const rover = new Rover(initialParams)
     rover.runCommands(['r', 'f'])
+    expect(rover.position).toEqual([1, 0])
+  })
+  it('move backward looking to the west', () => {
+    const rover = new Rover(initialParams)
+    rover.runCommands(['l', 'b'])
     expect(rover.position).toEqual([1, 0])
   })
 })
