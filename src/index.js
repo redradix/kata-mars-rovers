@@ -14,7 +14,9 @@ class Rover {
     if (
       typeof params.startingPoint !== 'object' ||
       typeof params.startingPoint[0] !== 'number' ||
-      typeof params.startingPoint[1] !== 'number'
+      typeof params.startingPoint[1] !== 'number' ||
+      parseInt(params.startingPoint[0], 10) !== params.startingPoint[0] ||
+      parseInt(params.startingPoint[1], 10) !== params.startingPoint[1]
     ) {
       throw new Error('ERR_STARTING_POINT_INVALID')
     }
