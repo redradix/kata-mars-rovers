@@ -12,4 +12,9 @@ describe('Mars Rovers', () => {
     rover.runCommands(['r'])
     expect(rover.direction).toEqual('E')
   })
+  it('turn three times right and once left', () => {
+    const rover = new Rover(initialParams)
+    rover.runCommands(['r', 'r', 'l'])
+    expect(rover.direction).toEqual('S')
+  })
 })
