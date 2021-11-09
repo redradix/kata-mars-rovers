@@ -34,4 +34,9 @@ describe('Mars Rovers', () => {
     rover.runCommands(['r', 'f', 'r', 'r', 'f'])
     expect(rover.position).toEqual([0, 0])
   })
+  it('move backward looking to the east', () => {
+    const rover = new Rover(initialParams)
+    rover.runCommands(['r', 'f', 'b'])
+    expect(rover.position).toEqual([0, 0])
+  })
 })
