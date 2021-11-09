@@ -123,4 +123,23 @@ describe('Mars Rovers', () => {
       const rover = new Rover({ ...initialParams, direction: 'Q' })
     }).toThrow('ERR_DIRECTION_INVALID')
   })
+
+  it('runs several commands turning and moving around', () => {
+    const rover = new Rover(initialParams)
+    rover.runCommands([
+      'r',
+      'f',
+      'f',
+      'f',
+      'r',
+      'f',
+      'f',
+      'l',
+      'b',
+      'b',
+      'l',
+      'f',
+    ])
+    expect(rover.position).toEqual([1, 1])
+  })
 })
