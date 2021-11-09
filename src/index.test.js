@@ -113,6 +113,11 @@ describe('Mars Rovers', () => {
       const rover = new Rover({ ...initialParams, gridSize: ['a', 'b'] })
     }).toThrow('ERR_GRID_SIZE_INVALID')
   })
+  it('throws an error if the grid size is not an array of integers', () => {
+    expect(() => {
+      const rover = new Rover({ ...initialParams, gridSize: [0.1, 0.1] })
+    }).toThrow('ERR_GRID_SIZE_INVALID')
+  })
   it('throws an error if the initial direction is invalid', () => {
     expect(() => {
       const rover = new Rover({ ...initialParams, direction: 'Q' })
