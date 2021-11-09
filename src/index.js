@@ -12,6 +12,11 @@ const isPositionInBounds = (position, gridSize) =>
   isCoordinateInGridSide(position[0], gridSize[0]) &&
   isCoordinateInGridSide(position[1], gridSize[1])
 
+const getFromCircularArray = (arr, idx) => {
+  const length = arr.length
+  return arr[((idx % length) + length) % length]
+}
+
 class Rover {
   constructor(params) {
     if (!isArrayOfTwoIntegers(params.gridSize)) {
@@ -34,19 +39,10 @@ class Rover {
   }
 
   turn(command) {
-    let directionIndex = DIRECTIONS.indexOf(this.direction)
-    if (command === 'r') {
-      directionIndex++
-      if (directionIndex > DIRECTIONS.length - 1) {
-        directionIndex = 0
-      }
-    } else if (command === 'l') {
-      directionIndex--
-      if (directionIndex < 0) {
-        directionIndex = DIRECTIONS.length - 1
-      }
-    }
-    this.direction = DIRECTIONS[directionIndex]
+    const directionIndex = DIRECTIONS.indexOf(this.direction)
+    const newDirectionIndex =
+      command === 'r' ? directionIndex + 1 : directionIndex - 1
+    this.direction = getFromCircularArray(DIRECTIONS, newDirectionIndex)
   }
 
   move(command) {

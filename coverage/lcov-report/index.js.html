@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.12% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/41</span>
+                <span class='fraction'>37/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.48% </span>
+                <span class="strong">97.56% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>43/47</span>
+                <span class='fraction'>40/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.12% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/41</span>
+                <span class='fraction'>37/37</span>
             </div>
         
             
@@ -141,12 +141,7 @@
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">40x</span>
@@ -158,6 +153,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,17 +183,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,14 +192,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
@@ -249,6 +239,11 @@ const isPositionInBounds = (position, gridSize) =&gt;
   isCoordinateInGridSide(position[0], gridSize[0]) &amp;&amp;
   isCoordinateInGridSide(position[1], gridSize[1])
 &nbsp;
+const getFromCircularArray = (arr, idx) =&gt; {
+  const length = arr.length
+  return arr[((idx % length) + length) % length]
+}
+&nbsp;
 class Rover {
   constructor(params) {
     if (!isArrayOfTwoIntegers(params.gridSize)) {
@@ -271,33 +266,23 @@ class Rover {
   }
 &nbsp;
   turn(command) {
-    let directionIndex = DIRECTIONS.indexOf(this.direction)
-    if (command === 'r') {
-      directionIndex++
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (directionIndex &gt; DIRECTIONS.length - 1) {
-<span class="cstat-no" title="statement not covered" >        directionIndex = 0</span>
-      }
-    } else if (command === 'l') {
-      directionIndex--
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (directionIndex &lt; 0) {
-<span class="cstat-no" title="statement not covered" >        directionIndex = DIRECTIONS.length - 1</span>
-      }
-    }
-    this.direction = DIRECTIONS[directionIndex]
+    const directionIndex = DIRECTIONS.indexOf(this.direction)
+    const newDirectionIndex =
+      command === 'r' ? directionIndex + 1 : directionIndex - 1
+    this.direction = getFromCircularArray(DIRECTIONS, newDirectionIndex)
   }
 &nbsp;
   move(command) {
     const positionIndex =
       this.direction === 'E' || this.direction === 'W' ? 0 : 1
 &nbsp;
-    let positionModifier = 1
-    if (
-      (command === 'f' &amp;&amp; this.direction === 'N') ||
-      (command === 'f' &amp;&amp; this.direction === 'W') ||
-      (command === 'b' &amp;&amp; this.direction === 'E') ||
-      (command === 'b' &amp;&amp; this.direction === 'S')
-    ) {
-      positionModifier = -1
+    let positionModifier
+    if (command === 'f') {
+      positionModifier =
+        this.direction === 'E' || this.direction === 'S' ? 1 : -1
+    } else {
+      positionModifier =
+        this.direction === 'E' || this.direction === 'S' ? -1 : 1
     }
 &nbsp;
     if (
@@ -331,7 +316,7 @@ module.exports = Rover
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Nov 09 2021 12:42:30 GMT+0100 (Central European Standard Time)
+                at Tue Nov 09 2021 14:03:17 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
