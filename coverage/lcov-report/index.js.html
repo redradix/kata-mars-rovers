@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">95.12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>39/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.83% </span>
+                <span class="strong">91.48% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>45/49</span>
+                <span class='fraction'>43/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">95.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>39/41</span>
             </div>
         
             
@@ -143,11 +143,21 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,11 +171,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
@@ -207,6 +212,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,6 +242,13 @@ const isArrayOfTwoIntegers = arr =&gt;
   parseInt(arr[0], 10) === arr[0] &amp;&amp;
   parseInt(arr[1], 10) === arr[1]
 &nbsp;
+const isCoordinateInGridSide = (postionCoordinate, gridSideLength) =&gt;
+  postionCoordinate &gt;= 0 &amp;&amp; postionCoordinate &lt;= gridSideLength
+&nbsp;
+const isPositionInBounds = (position, gridSize) =&gt;
+  isCoordinateInGridSide(position[0], gridSize[0]) &amp;&amp;
+  isCoordinateInGridSide(position[1], gridSize[1])
+&nbsp;
 class Rover {
   constructor(params) {
     if (!isArrayOfTwoIntegers(params.gridSize)) {
@@ -246,12 +259,7 @@ class Rover {
     if (!isArrayOfTwoIntegers(params.startingPoint)) {
       throw new Error('ERR_STARTING_POINT_INVALID')
     }
-    if (
-      params.startingPoint[0] &lt; 0 ||
-      params.startingPoint[1] &lt; 0 ||
-      params.startingPoint[0] &gt; params.gridSize[0] ||
-      params.startingPoint[1] &gt; params.gridSize[1]
-    ) {
+    if (!isPositionInBounds(params.startingPoint, params.gridSize)) {
       throw new Error('ERR_STARTING_POINT_OUT_OF_BOUNDS')
     }
     this.position = [...params.startingPoint]
@@ -293,9 +301,10 @@ class Rover {
     }
 &nbsp;
     if (
-      this.position[positionIndex] + positionModifier &lt; 0 ||
-      this.position[positionIndex] + positionModifier &gt;
-        this.gridSize[positionIndex]
+      !isCoordinateInGridSide(
+        this.position[positionIndex] + positionModifier,
+        this.gridSize[positionIndex],
+      )
     ) {
       throw new Error('ERR_MOVING_OUT_OF_BOUNDS')
     }
@@ -322,7 +331,7 @@ module.exports = Rover
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Nov 09 2021 12:22:59 GMT+0100 (Central European Standard Time)
+                at Tue Nov 09 2021 12:42:30 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

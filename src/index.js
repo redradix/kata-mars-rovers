@@ -5,6 +5,13 @@ const isArrayOfTwoIntegers = arr =>
   parseInt(arr[0], 10) === arr[0] &&
   parseInt(arr[1], 10) === arr[1]
 
+const isCoordinateInGridSide = (postionCoordinate, gridSideLength) =>
+  postionCoordinate >= 0 && postionCoordinate <= gridSideLength
+
+const isPositionInBounds = (position, gridSize) =>
+  isCoordinateInGridSide(position[0], gridSize[0]) &&
+  isCoordinateInGridSide(position[1], gridSize[1])
+
 class Rover {
   constructor(params) {
     if (!isArrayOfTwoIntegers(params.gridSize)) {
@@ -15,12 +22,7 @@ class Rover {
     if (!isArrayOfTwoIntegers(params.startingPoint)) {
       throw new Error('ERR_STARTING_POINT_INVALID')
     }
-    if (
-      params.startingPoint[0] < 0 ||
-      params.startingPoint[1] < 0 ||
-      params.startingPoint[0] > params.gridSize[0] ||
-      params.startingPoint[1] > params.gridSize[1]
-    ) {
+    if (!isPositionInBounds(params.startingPoint, params.gridSize)) {
       throw new Error('ERR_STARTING_POINT_OUT_OF_BOUNDS')
     }
     this.position = [...params.startingPoint]
@@ -62,9 +64,10 @@ class Rover {
     }
 
     if (
-      this.position[positionIndex] + positionModifier < 0 ||
-      this.position[positionIndex] + positionModifier >
-        this.gridSize[positionIndex]
+      !isCoordinateInGridSide(
+        this.position[positionIndex] + positionModifier,
+        this.gridSize[positionIndex],
+      )
     ) {
       throw new Error('ERR_MOVING_OUT_OF_BOUNDS')
     }
