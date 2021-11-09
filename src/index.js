@@ -1,3 +1,5 @@
+const DIRECTIONS = ['N', 'E', 'S', 'W']
+
 class Rover {
   constructor(params) {
     this.position = params.startingPoint
@@ -6,9 +8,22 @@ class Rover {
   }
 
   runCommands(commands) {
-    if (commands[0] === 'r') {
-      this.direction = 'E'
-    }
+    let directionIndex = DIRECTIONS.indexOf(this.direction)
+    commands.forEach(command => {
+      if (command === 'r') {
+        directionIndex++
+        if (directionIndex > DIRECTIONS.length - 1) {
+          directionIndex = 0
+        }
+        this.direction = DIRECTIONS[directionIndex]
+      } else if (command === 'l') {
+        directionIndex--
+        if (directionIndex < 0) {
+          directionIndex = DIRECTIONS.length - 1
+        }
+        this.direction = DIRECTIONS[directionIndex]
+      }
+    })
   }
 }
 
