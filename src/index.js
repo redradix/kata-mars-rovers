@@ -10,6 +10,7 @@ class Rover {
       throw new Error('ERR_GRID_SIZE_INVALID')
     }
     this.gridSize = params.gridSize
+
     if (
       typeof params.startingPoint !== 'object' ||
       typeof params.startingPoint[0] !== 'number' ||
@@ -26,6 +27,10 @@ class Rover {
       throw new Error('ERR_STARTING_POINT_OUT_OF_BOUNDS')
     }
     this.position = [...params.startingPoint]
+
+    if (!DIRECTIONS.includes(params.direction)) {
+      throw new Error('ERR_DIRECTION_INVALID')
+    }
     this.direction = params.direction
   }
 
