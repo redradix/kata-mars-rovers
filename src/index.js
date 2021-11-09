@@ -2,7 +2,7 @@ const DIRECTIONS = ['N', 'E', 'S', 'W']
 
 class Rover {
   constructor(params) {
-    this.position = params.startingPoint
+    this.position = [...params.startingPoint]
     this.direction = params.direction
     this.gridSize = params.gridSize
   }
