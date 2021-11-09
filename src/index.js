@@ -27,6 +27,8 @@ class Rover {
     commands.forEach(command => {
       if (command === 'r' || command === 'l') {
         this.turn(command)
+      } else if (command === 'f' && this.direction === 'E') {
+        this.position[0]++
       }
     })
   }
