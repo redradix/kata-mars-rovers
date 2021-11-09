@@ -1,25 +1,18 @@
 const DIRECTIONS = ['N', 'E', 'S', 'W']
 
+const isArrayOfTwoIntegers = arr =>
+  typeof arr === 'object' &&
+  parseInt(arr[0], 10) === arr[0] &&
+  parseInt(arr[1], 10) === arr[1]
+
 class Rover {
   constructor(params) {
-    if (
-      typeof params.gridSize !== 'object' ||
-      typeof params.gridSize[0] !== 'number' ||
-      typeof params.gridSize[1] !== 'number' ||
-      parseInt(params.gridSize[0], 10) !== params.gridSize[0] ||
-      parseInt(params.gridSize[1], 10) !== params.gridSize[1]
-    ) {
+    if (!isArrayOfTwoIntegers(params.gridSize)) {
       throw new Error('ERR_GRID_SIZE_INVALID')
     }
     this.gridSize = params.gridSize
 
-    if (
-      typeof params.startingPoint !== 'object' ||
-      typeof params.startingPoint[0] !== 'number' ||
-      typeof params.startingPoint[1] !== 'number' ||
-      parseInt(params.startingPoint[0], 10) !== params.startingPoint[0] ||
-      parseInt(params.startingPoint[1], 10) !== params.startingPoint[1]
-    ) {
+    if (!isArrayOfTwoIntegers(params.startingPoint)) {
       throw new Error('ERR_STARTING_POINT_INVALID')
     }
     if (
