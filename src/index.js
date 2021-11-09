@@ -2,9 +2,9 @@ const DIRECTIONS = ['N', 'E', 'S', 'W']
 
 class Rover {
   constructor(params) {
+    this.gridSize = params.gridSize
     this.position = [...params.startingPoint]
     this.direction = params.direction
-    this.gridSize = params.gridSize
   }
 
   turn(command) {
@@ -42,7 +42,7 @@ class Rover {
       this.position[positionIndex] + positionModifier >
         this.gridSize[positionIndex]
     ) {
-      throw new Error('Going out of bounds')
+      throw new Error('ERR_OUT_OF_BOUNDS')
     }
 
     this.position[positionIndex] += positionModifier

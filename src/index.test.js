@@ -74,11 +74,11 @@ describe('Mars Rovers', () => {
 
   it('throws an error if it goes out of bounds to the north', () => {
     const rover = new Rover(initialParams)
-    expect(() => rover.runCommands(['f'])).toThrow()
+    expect(() => rover.runCommands(['f'])).toThrow('ERR_OUT_OF_BOUNDS')
   })
   it('throws an error if it goes out of bounds to the south', () => {
     const rover = new Rover({ ...initialParams, startingPoint: [0, 10] })
-    expect(() => rover.runCommands(['b'])).toThrow()
+    expect(() => rover.runCommands(['b'])).toThrow('ERR_OUT_OF_BOUNDS')
   })
   it('throws an error if it goes out of bounds to the east', () => {
     const rover = new Rover({
@@ -86,10 +86,10 @@ describe('Mars Rovers', () => {
       direction: 'E',
       startingPoint: [10, 0],
     })
-    expect(() => rover.runCommands(['f'])).toThrow()
+    expect(() => rover.runCommands(['f'])).toThrow('ERR_OUT_OF_BOUNDS')
   })
   it('throws an error if it goes out of bounds to the west', () => {
     const rover = new Rover({ ...initialParams, direction: 'W' })
-    expect(() => rover.runCommands(['f'])).toThrow()
+    expect(() => rover.runCommands(['f'])).toThrow('ERR_OUT_OF_BOUNDS')
   })
 })
