@@ -23,26 +23,29 @@ class Rover {
     this.direction = DIRECTIONS[directionIndex]
   }
 
+  move(command) {
+    const positionIndex =
+      this.direction === 'E' || this.direction === 'W' ? 0 : 1
+
+    let positionModifier = 1
+    if (
+      (command === 'f' && this.direction === 'N') ||
+      (command === 'f' && this.direction === 'W') ||
+      (command === 'b' && this.direction === 'E') ||
+      (command === 'b' && this.direction === 'S')
+    ) {
+      positionModifier = -1
+    }
+
+    this.position[positionIndex] += positionModifier
+  }
+
   runCommands(commands) {
     commands.forEach(command => {
       if (command === 'r' || command === 'l') {
         this.turn(command)
-      } else if (command === 'f' && this.direction === 'E') {
-        this.position[0]++
-      } else if (command === 'f' && this.direction === 'W') {
-        this.position[0]--
-      } else if (command === 'f' && this.direction === 'N') {
-        this.position[1]--
-      } else if (command === 'f' && this.direction === 'S') {
-        this.position[1]++
-      } else if (command === 'b' && this.direction === 'W') {
-        this.position[0]++
-      } else if (command === 'b' && this.direction === 'E') {
-        this.position[0]--
-      } else if (command === 'b' && this.direction === 'N') {
-        this.position[1]++
-      } else if (command === 'b' && this.direction === 'S') {
-        this.position[1]--
+      } else if (command === 'f' || command === 'b') {
+        this.move(command)
       }
     })
   }
