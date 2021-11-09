@@ -29,6 +29,8 @@ class Rover {
         this.turn(command)
       } else if (command === 'f' && this.direction === 'E') {
         this.position[0]++
+      } else if (command === 'f' && this.direction === 'W') {
+        this.position[0]--
       } else if (command === 'b' && this.direction === 'W') {
         this.position[0]++
       }
