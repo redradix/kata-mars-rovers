@@ -98,4 +98,10 @@ describe('Mars Rovers', () => {
       const rover = new Rover({ ...initialParams, startingPoint: [0, 11] })
     }).toThrow('ERR_STARTING_POINT_OUT_OF_BOUNDS')
   })
+  it('throws an error if the starting point is not an array of numbers', () => {
+    expect(() => {
+      const rover = new Rover({ ...initialParams, startingPoint: ['a', 'b'] })
+    }).toThrow('ERR_STARTING_POINT_INVALID')
+  })
+
 })
