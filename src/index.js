@@ -49,14 +49,10 @@ class Rover {
     const positionIndex =
       this.direction === 'E' || this.direction === 'W' ? 0 : 1
 
-    let positionModifier = 1
-    if (
-      (command === 'f' && this.direction === 'N') ||
-      (command === 'f' && this.direction === 'W') ||
-      (command === 'b' && this.direction === 'E') ||
-      (command === 'b' && this.direction === 'S')
-    ) {
-      positionModifier = -1
+    let positionModifier =
+      this.direction === 'E' || this.direction === 'S' ? 1 : -1
+    if (command === 'b') {
+      positionModifier = positionModifier * -1
     }
 
     if (
