@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636452523404" clover="3.2.0">
-  <project timestamp="1636452523404" name="All files">
+<coverage generated="1636452652781" clover="3.2.0">
+  <project timestamp="1636452652781" name="All files">
     <metrics statements="27" coveredstatements="25" conditionals="34" coveredconditionals="30" methods="5" coveredmethods="5" elements="66" coveredelements="60" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
     <file name="index.js" path="/Users/virgilio/Documents/code/katas/kata-mars-rovers/src/index.js">
       <metrics statements="27" coveredstatements="25" conditionals="34" coveredconditionals="30" methods="5" coveredmethods="5"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="5" count="14" type="stmt"/>
-      <line num="6" count="14" type="stmt"/>
-      <line num="7" count="14" type="stmt"/>
+      <line num="5" count="15" type="stmt"/>
+      <line num="6" count="15" type="stmt"/>
+      <line num="7" count="15" type="stmt"/>
       <line num="11" count="5" type="stmt"/>
       <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
       <line num="13" count="4" type="stmt"/>

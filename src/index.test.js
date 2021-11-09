@@ -92,4 +92,10 @@ describe('Mars Rovers', () => {
     const rover = new Rover({ ...initialParams, direction: 'W' })
     expect(() => rover.runCommands(['f'])).toThrow('ERR_OUT_OF_BOUNDS')
   })
+
+  it('throws an error if the starting point is out of bounds', () => {
+    expect(() => {
+      const rover = new Rover({ ...initialParams, startingPoint: [0, 11] })
+    }).toThrow('ERR_STARTING_POINT_OUT_OF_BOUNDS')
+  })
 })
