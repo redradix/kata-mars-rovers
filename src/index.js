@@ -50,7 +50,7 @@ class Rover {
       this.position[positionIndex] + positionModifier >
         this.gridSize[positionIndex]
     ) {
-      throw new Error('ERR_OUT_OF_BOUNDS')
+      throw new Error('ERR_MOVING_OUT_OF_BOUNDS')
     }
 
     this.position[positionIndex] += positionModifier
