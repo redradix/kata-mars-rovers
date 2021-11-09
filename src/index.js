@@ -33,6 +33,8 @@ class Rover {
         this.position[0]--
       } else if (command === 'b' && this.direction === 'W') {
         this.position[0]++
+      } else if (command === 'b' && this.direction === 'E') {
+        this.position[0]--
       }
     })
   }
