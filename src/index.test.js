@@ -103,5 +103,9 @@ describe('Mars Rovers', () => {
       const rover = new Rover({ ...initialParams, startingPoint: ['a', 'b'] })
     }).toThrow('ERR_STARTING_POINT_INVALID')
   })
-
+  it('throws an error if the grid size is not an array of numbers', () => {
+    expect(() => {
+      const rover = new Rover({ ...initialParams, gridSize: ['a', 'b'] })
+    }).toThrow('ERR_GRID_SIZE_INVALID')
+  })
 })
