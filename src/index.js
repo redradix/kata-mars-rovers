@@ -3,6 +3,14 @@ const DIRECTIONS = ['N', 'E', 'S', 'W']
 class Rover {
   constructor(params) {
     this.gridSize = params.gridSize
+    if (
+      params.startingPoint[0] < 0 ||
+      params.startingPoint[1] < 0 ||
+      params.startingPoint[0] > params.gridSize[0] ||
+      params.startingPoint[1] > params.gridSize[1]
+    ) {
+      throw new Error('ERR_STARTING_POINT_OUT_OF_BOUNDS')
+    }
     this.position = [...params.startingPoint]
     this.direction = params.direction
   }
