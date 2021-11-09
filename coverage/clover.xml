@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636446164142" clover="3.2.0">
-  <project timestamp="1636446164142" name="All files">
-    <metrics statements="32" coveredstatements="30" conditionals="40" coveredconditionals="36" methods="4" coveredmethods="4" elements="76" coveredelements="70" complexity="0" loc="32" ncloc="32" packages="1" files="1" classes="1"/>
+<coverage generated="1636446212958" clover="3.2.0">
+  <project timestamp="1636446212958" name="All files">
+    <metrics statements="32" coveredstatements="30" conditionals="40" coveredconditionals="37" methods="4" coveredmethods="4" elements="76" coveredelements="71" complexity="0" loc="32" ncloc="32" packages="1" files="1" classes="1"/>
     <file name="index.js" path="/Users/virgilio/Documents/code/katas/kata-mars-rovers/src/index.js">
-      <metrics statements="32" coveredstatements="30" conditionals="40" coveredconditionals="36" methods="4" coveredmethods="4"/>
+      <metrics statements="32" coveredstatements="30" conditionals="40" coveredconditionals="37" methods="4" coveredmethods="4"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="5" count="9" type="stmt"/>
-      <line num="6" count="9" type="stmt"/>
-      <line num="7" count="9" type="stmt"/>
+      <line num="5" count="10" type="stmt"/>
+      <line num="6" count="10" type="stmt"/>
+      <line num="7" count="10" type="stmt"/>
       <line num="11" count="5" type="stmt"/>
       <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
       <line num="13" count="4" type="stmt"/>
@@ -18,22 +18,22 @@
       <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="20" count="0" type="stmt"/>
       <line num="23" count="5" type="stmt"/>
-      <line num="27" count="9" type="stmt"/>
-      <line num="28" count="12" type="cond" truecount="4" falsecount="0"/>
+      <line num="27" count="10" type="stmt"/>
+      <line num="28" count="13" type="cond" truecount="4" falsecount="0"/>
       <line num="29" count="5" type="stmt"/>
-      <line num="30" count="7" type="cond" truecount="4" falsecount="0"/>
+      <line num="30" count="8" type="cond" truecount="4" falsecount="0"/>
       <line num="31" count="1" type="stmt"/>
-      <line num="32" count="6" type="cond" truecount="4" falsecount="0"/>
+      <line num="32" count="7" type="cond" truecount="4" falsecount="0"/>
       <line num="33" count="1" type="stmt"/>
-      <line num="34" count="5" type="cond" truecount="4" falsecount="0"/>
+      <line num="34" count="6" type="cond" truecount="4" falsecount="0"/>
       <line num="35" count="1" type="stmt"/>
-      <line num="36" count="4" type="cond" truecount="4" falsecount="0"/>
+      <line num="36" count="5" type="cond" truecount="4" falsecount="0"/>
       <line num="37" count="1" type="stmt"/>
-      <line num="38" count="3" type="cond" truecount="4" falsecount="0"/>
+      <line num="38" count="4" type="cond" truecount="4" falsecount="0"/>
       <line num="39" count="1" type="stmt"/>
-      <line num="40" count="2" type="cond" truecount="4" falsecount="0"/>
+      <line num="40" count="3" type="cond" truecount="4" falsecount="0"/>
       <line num="41" count="1" type="stmt"/>
-      <line num="42" count="1" type="cond" truecount="3" falsecount="1"/>
+      <line num="42" count="2" type="cond" truecount="4" falsecount="0"/>
       <line num="43" count="1" type="stmt"/>
       <line num="49" count="1" type="stmt"/>
     </file>
