@@ -4,6 +4,13 @@ class Rover {
   constructor(params) {
     this.gridSize = params.gridSize
     if (
+      typeof params.startingPoint !== 'object' ||
+      typeof params.startingPoint[0] !== 'number' ||
+      typeof params.startingPoint[1] !== 'number'
+    ) {
+      throw new Error('ERR_STARTING_POINT_INVALID')
+    }
+    if (
       params.startingPoint[0] < 0 ||
       params.startingPoint[1] < 0 ||
       params.startingPoint[0] > params.gridSize[0] ||
