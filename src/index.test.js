@@ -17,4 +17,10 @@ describe('Mars Rovers', () => {
     rover.runCommands(['r', 'r', 'r', 'l'])
     expect(rover.direction).toEqual('S')
   })
+  
+  it('turn right and mode forward', () => {
+    const rover = new Rover(initialParams)
+    rover.runCommands(['r', 'f'])
+    expect(rover.position).toEqual([1, 0])
+  })
 })
