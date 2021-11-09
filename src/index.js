@@ -5,7 +5,9 @@ class Rover {
     if (
       typeof params.gridSize !== 'object' ||
       typeof params.gridSize[0] !== 'number' ||
-      typeof params.gridSize[1] !== 'number'
+      typeof params.gridSize[1] !== 'number' ||
+      parseInt(params.gridSize[0], 10) !== params.gridSize[0] ||
+      parseInt(params.gridSize[1], 10) !== params.gridSize[1]
     ) {
       throw new Error('ERR_GRID_SIZE_INVALID')
     }
