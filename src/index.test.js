@@ -19,23 +19,31 @@ describe('Mars Rovers', () => {
   })
 
   it('moves forward looking to the east', () => {
-    const rover = new Rover(initialParams)
-    rover.runCommands(['r', 'f'])
+    const rover = new Rover({ ...initialParams, direction: 'E' })
+    rover.runCommands(['f'])
     expect(rover.position).toEqual([1, 0])
   })
   it('moves backward looking to the west', () => {
-    const rover = new Rover(initialParams)
-    rover.runCommands(['l', 'b'])
+    const rover = new Rover({ ...initialParams, direction: 'W' })
+    rover.runCommands(['b'])
     expect(rover.position).toEqual([1, 0])
   })
   it('moves forward looking to the west', () => {
-    const rover = new Rover(initialParams)
-    rover.runCommands(['r', 'f', 'r', 'r', 'f'])
+    const rover = new Rover({
+      ...initialParams,
+      direction: 'W',
+      startingPoint: [1, 0],
+    })
+    rover.runCommands(['f'])
     expect(rover.position).toEqual([0, 0])
   })
   it('moves backward looking to the east', () => {
-    const rover = new Rover(initialParams)
-    rover.runCommands(['r', 'f', 'b'])
+    const rover = new Rover({
+      ...initialParams,
+      direction: 'E',
+      startingPoint: [1, 0],
+    })
+    rover.runCommands(['b'])
     expect(rover.position).toEqual([0, 0])
   })
 })
