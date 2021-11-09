@@ -6,7 +6,7 @@ const isArrayOfTwoIntegers = arr =>
   parseInt(arr[1], 10) === arr[1]
 
 const isCoordinateInGridSide = (postionCoordinate, gridSideLength) =>
-  postionCoordinate >= 0 && postionCoordinate <= gridSideLength
+  postionCoordinate >= 0 && postionCoordinate < gridSideLength
 
 const isPositionInBounds = (position, gridSize) =>
   isCoordinateInGridSide(position[0], gridSize[0]) &&

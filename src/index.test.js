@@ -77,14 +77,14 @@ describe('Mars Rovers', () => {
     expect(() => rover.runCommands(['f'])).toThrow('ERR_MOVING_OUT_OF_BOUNDS')
   })
   it('throws an error if it goes out of bounds to the south', () => {
-    const rover = new Rover({ ...initialParams, startingPoint: [0, 10] })
+    const rover = new Rover({ ...initialParams, startingPoint: [0, 9] })
     expect(() => rover.runCommands(['b'])).toThrow('ERR_MOVING_OUT_OF_BOUNDS')
   })
   it('throws an error if it goes out of bounds to the east', () => {
     const rover = new Rover({
       ...initialParams,
       direction: 'E',
-      startingPoint: [10, 0],
+      startingPoint: [9, 0],
     })
     expect(() => rover.runCommands(['f'])).toThrow('ERR_MOVING_OUT_OF_BOUNDS')
   })
