@@ -2,6 +2,13 @@ const DIRECTIONS = ['N', 'E', 'S', 'W']
 
 class Rover {
   constructor(params) {
+    if (
+      typeof params.gridSize !== 'object' ||
+      typeof params.gridSize[0] !== 'number' ||
+      typeof params.gridSize[1] !== 'number'
+    ) {
+      throw new Error('ERR_GRID_SIZE_INVALID')
+    }
     this.gridSize = params.gridSize
     if (
       typeof params.startingPoint !== 'object' ||
